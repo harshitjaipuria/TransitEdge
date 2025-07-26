@@ -2,7 +2,6 @@
 
 A full-featured 🌐 SaaS web-based platform tailored for 🏢 transport and logistics companies, built using the modern 🧱 MERN stack along with ⚛️ Next.js, 🗄️ MySQL, and 🔧 Prisma ORM.
 
-━━━━━━━━━━━━━━━━━━━━
 🧰 Tech Stack
 
 💻 Frontend: React.js, Tailwind CSS, Next.js  
@@ -36,3 +35,5 @@ A full-featured 🌐 SaaS web-based platform tailored for 🏢 transport and log
 🙋‍♂️ Harshit Jaipuria  
 🔗 Connect on LinkedIn  
 🤝 Contributions welcome via Pull Requests
+
+Note: This is a under construction Project
