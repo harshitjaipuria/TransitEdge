@@ -9,7 +9,7 @@ A full-featured 🌐 SaaS web-based platform tailored for 🏢 transport and log
 🗃️ Database: MySQL with Prisma ORM  
 🔌 Architecture: RESTful APIs, Modular File Structure, Environment-Based Configuration
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  • Features
 
 🚚 Fleet & Driver Management  
@@ -19,17 +19,17 @@ A full-featured 🌐 SaaS web-based platform tailored for 🏢 transport and log
 🔐 Secure Authentication & Role-Based Access  
 ⚙️ Scalable & Modular Design
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌐 Live Demo
 
 🚧 Coming soon...
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📸 Screenshots
 
 🖼️ Coming soon...
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 👨‍💻 Author
 
 🙋‍♂️ Harshit Jaipuria  
