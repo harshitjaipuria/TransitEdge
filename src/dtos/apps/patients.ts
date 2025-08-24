@@ -1,0 +1,34 @@
+//patients list
+export interface Patients {
+  id: number
+  image: string
+  date: string
+  first_name: string
+  last_name: string
+  middle_name: string
+  age: string
+  weight: string
+  height: string
+  stateName: string
+  countryName: string
+  zipCode: string
+  familyDoctor: string
+  referringDoctor: string
+  pharmacyName: string
+  blood_group: string
+  occupation: string
+  city: string
+  email: string
+  phoneNumber: string
+  emergencyNumber: string
+  insurance: string
+  location: string
+  treatmentType: string
+  doctorName: string
+  gender: string
+  status: string
+  insurance_provider: string
+  policy_number: string
+  start_Date: string
+  effective_date: string
+}

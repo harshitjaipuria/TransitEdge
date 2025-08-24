@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "paths": {
+      "@src/*": ["./src/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@views/*": ["./src/views/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@common/*": ["./src/common/*"],
+      "@custom/*": ["./src/components/custom/*"],
+      "@dtos/*": ["./src/dtos/*"],
+      "api_ data/*": ["./src/api_data/*"],
+      "react": ["./node_modules/@types/react"]
+    },
+    "target": "ES2017",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "src/views/auth/resetPassword",
+    "src/views/widgets/data",
+    ".next/types/**/*.ts",
+    "src/app/api/auth/[...nextauth]/route.ts"
+  ],
+  "exclude": ["node_modules"]
+}

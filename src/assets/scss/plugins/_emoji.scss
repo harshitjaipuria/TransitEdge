@@ -1,0 +1,21 @@
+:root {
+  .epr_-6npj90 {
+    --epr-category-label-bg-color: theme(colors.white);
+    --epr-bg-color: theme(colors.white);
+    --epr-text-color: theme(colors.gray[500]);
+    --epr-picker-border-color: theme(colors.gray[200]);
+    --epr-search-input-bg-color: theme(colors.gray[100]);
+    --epr-hover-bg-color: theme(colors.gray[100]);
+  }
+
+  &[data-mode='dark'] {
+    .epr_-6npj90 {
+      --epr-category-label-bg-color: var(--colors-dark-900);
+      --epr-bg-color: var(--colors-dark-900);
+      --epr-text-color: var(--colors-dark-500);
+      --epr-picker-border-color: var(--colors-dark-800);
+      --epr-search-input-bg-color: var(--colors-dark-850);
+      --epr-hover-bg-color: var(--colors-dark-850);
+    }
+  }
+}

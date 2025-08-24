@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model account {
+  id                Int     @id @default(autoincrement())
+  userId            Int
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              user    @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Account_userId_fkey")
+
+  @@unique([provider, providerAccountId], map: "Account_provider_providerAccountId_key")
+  @@index([userId], map: "Account_userId_fkey")
+}
+
+model session {
+  id           Int      @id @default(autoincrement())
+  sessionToken String   @unique(map: "Session_sessionToken_key")
+  userId       Int
+  expires      DateTime
+  user         user     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Session_userId_fkey")
+
+  @@index([userId], map: "Session_userId_fkey")
+}
+
+model user {
+  id             Int       @id @default(autoincrement())
+  name           String?
+  email          String?   @unique(map: "User_email_key")
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime
+  account        account[]
+  session        session[]
+}
+
+model verificationtoken {
+  id         Int      @id @default(autoincrement())
+  identifier String
+  token      String   @unique(map: "VerificationToken_token_key")
+  expires    DateTime
+
+  @@unique([identifier, token], map: "VerificationToken_identifier_token_key")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model employee {
+  Harshit Int
+  Rakesh  Int
+
+  @@ignore
+}
+
+model employees {
+  id            Int    @id @default(autoincrement())
+  name          String @db.VarChar(100)
+  branch_office String @db.VarChar(100)
+}

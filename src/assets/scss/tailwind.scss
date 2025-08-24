@@ -1,0 +1,45 @@
+/*
+Template Name: Domiex - Admin & Dashboard Template
+Author: SRBThemes
+Version: 1.0.0
+File: tailwind scss files
+*/
+
+@use 'sass:meta';
+@use 'fonts/fonts';
+@use 'custom';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@include meta.load-css('plugins/emoji');
+
+@layer components {
+  .fc-timeline-event {
+    @apply py-1.5 px-4;
+  }
+
+  @media (max-width: 767px) {
+    .fc-toolbar.fc-header-toolbar {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:nth-child(1) {
+      order: 3;
+    }
+
+    .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:nth-child(2) {
+      order: 1;
+    }
+
+    .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:nth-child(3) {
+      order: 2;
+    }
+  }
+
+  .fc-license-message {
+    @apply hidden;
+  }
+}

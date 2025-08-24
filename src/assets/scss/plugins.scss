@@ -1,0 +1,15 @@
+@use 'sass:meta';
+/*
+Template Name: Domiex - Admin & Dashboard Template
+Author: SRBThemes
+Version: 1.0.0
+File: plugins scss files
+*/
+
+@import 'simplebar/dist/simplebar.css';
+@import 'swiper/swiper-bundle.css';
+// @import 'tippy.js/dist/tippy.css';
+// @import 'virtual-select-plugin/dist/virtual-select.min.css';
+
+@include meta.load-css('plugins/nouislider');
+@include meta.load-css('plugins/range-slider');
