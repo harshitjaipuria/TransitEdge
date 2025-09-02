@@ -164,29 +164,7 @@ export default function Layout({
     document.documentElement.setAttribute("data-nav-type", layoutDarkModeClass);
     document.documentElement.setAttribute("dir", layoutDirection);
   }, []);
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-
-    if (typeof window !== "undefined") {
-      // Check if page was refreshed by checking sessionStorage
-      const isPageRefreshed = sessionStorage.getItem("isRefreshed");
-      if (!isPageRefreshed) {
-        sessionStorage.setItem("isRefreshed", "true");
-      } else {
-        if (window.innerWidth >= 768) {
-          timer = setTimeout(() => {
-            dispatch(changeSettingModalOpen(true));
-            console.log("Modal triggered on page refresh");
-          }, 500); // Delay to show modal after a short timeout
-        }
-      }
-    }
-    // Cleanup the timeout if the component is unmounted or the effect is cleaned up
-    return () => {
-      clearTimeout(timer);
-      sessionStorage.removeItem("isRefreshed");
-    };
-  }, [dispatch]);
+  // Disabled: prevent auto-opening the settings modal on refresh/load
 
   return (
     <React.Fragment>

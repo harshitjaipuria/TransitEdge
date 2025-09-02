@@ -78,7 +78,7 @@ export const initialState: LayoutItemsState = {
   layoutWidth: LAYOUT_CONTENT_WIDTH.DEFAULT,
   layoutMode: LAYOUT_MODE_TYPES.LIGHT,
   layoutSidebar: SIDEBAR_SIZE.DEFAULT,
-  layoutSidebarColor: SIDEBAR_COLOR.LIGHT,
+  layoutSidebarColor: SIDEBAR_COLOR.DARK,
   layoutDirection: LAYOUT_DIRECTION.LTR,
   layoutDataColor: DATA_COLORS.DEFAULT,
   layoutLanguages: LAYOUT_LANGUAGES.ENGLISH,

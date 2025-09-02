@@ -15,7 +15,7 @@ export function generateViewport() {
 }
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Domiex - Next TS Premium Admin & Dashboard Template",
+    title: "Shree Shyam Express - Your Logistics & Cargo Partner",
     description:
       "Domiex is a powerful and responsive admin dashboard template supporting 21 frameworks, including React, Angular, Laravel, Node.js, and more.",
     keywords: [
