@@ -2,210 +2,98 @@ import { MegaMenu } from '@src/dtos'
 
 const menu: MegaMenu[] = [
     {
-        title: 'Authentication',
-        lang: 'pe-authentication',
+        title: 'Master',
+        lang: 'pe-master',
         icon: 'users-round',
         link: '#',
         separator: false,
         children: [
-          {
-            title: 'Sign In',
-            link: '#',
-            lang: 'pe-sign-in',
-            children: [
-              {
-                title: 'Basic',
-                lang: 'pe-basic',
-                link: '/auth/signin-basic',
+            {
+                title: 'Broker Entry',
+                lang: 'pe-broker-entry',
+                link: '/master/broker-entry',
                 dropdownPosition: null,
                 children: [],
-              },
-              {
-                title: 'Modern',
-                lang: 'pe-modern',
-                link: '/auth/signin-modern',
+            },
+            {
+                title: 'Deliver Entry',
+                lang: 'pe-deliver-entry',
+                link: '/master/deliver-entry',
                 dropdownPosition: null,
                 children: [],
-              },
-              {
-                title: 'Creative',
-                lang: 'pe-creative',
-                link: '/auth/signin-creative',
+            },
+            {
+                title: 'Owner Entry',
+                lang: 'pe-owner-entry',
+                link: '/master/owner-entry',
                 dropdownPosition: null,
                 children: [],
-              },
-            ],
-          },
-          {
-            title: 'Sign Up',
-            link: '#',
-            lang: 'pe-sign-up',
-            children: [
-              {
-                title: 'Basic',
-                lang: 'pe-basic',
-                link: '/auth/signup-basic',
+            },
+            {
+                title: 'Packing Method',
+                lang: 'pe-packing-method',
+                link: '/master/packing-method',
                 dropdownPosition: null,
                 children: [],
-              },
-              {
-                title: 'Modern',
-                lang: 'pe-modern',
-                link: '/auth/signup-modern',
+            },
+            {
+                title: 'Client',
+                lang: 'pe-client',
+                link: '/master/client',
                 dropdownPosition: null,
                 children: [],
-              },
-              {
-                title: 'Creative',
-                lang: 'pe-creative',
-                link: '/auth/signup-creative',
+            },
+            {
+                title: 'Consignee',
+                lang: 'pe-consignee',
+                link: '/master/consignee',
                 dropdownPosition: null,
                 children: [],
-              },
-            ],
-          },
-          {
-            title: 'Forgot Password',
-            link: '#',
-            lang: 'pe-forgot-password',
-            children: [
-              {
-                title: 'Basic',
-                lang: 'pe-basic',
-                link: '/auth/forgot-password-basic',
+            },
+            {
+                title: 'Consignor',
+                lang: 'pe-consignor',
+                link: '/master/consignor',
                 dropdownPosition: null,
                 children: [],
-              },
-              {
-                title: 'Modern',
-                lang: 'pe-modern',
-                link: '/auth/forgot-password-modern',
+            },
+            {
+                title: 'Goods Category',
+                lang: 'pe-goods-category',
+                link: '/master/goods-category',
                 dropdownPosition: null,
                 children: [],
-              },
-              {
-                title: 'Creative',
-                lang: 'pe-creative',
-                link: '/auth/forgot-password-creative',
+            },
+            {
+                title: 'Goods',
+                lang: 'pe-goods',
+                link: '/master/goods',
                 dropdownPosition: null,
                 children: [],
-              },
-            ],
-          },
-          {
-            title: 'Two Step Verification',
-            link: '#',
-            lang: 'pe-two-step-verification',
-            children: [
-              {
-                title: 'Basic',
-                lang: 'pe-basic',
-                link: '/auth/two-step-verification-basic',
+            },
+            {
+                title: 'Lorry Master',
+                lang: 'pe-lorry-master',
+                link: '/master/lorry-master',
                 dropdownPosition: null,
                 children: [],
-              },
-              {
-                title: 'Modern',
-                lang: 'pe-modern',
-                link: '/auth/two-step-verification-modern',
+            },
+            {
+                title: 'Rate (Consignor)',
+                lang: 'pe-rate-consignor',
+                link: '/master/rate-consignor',
                 dropdownPosition: null,
                 children: [],
-              },
-              {
-                title: 'Creative',
-                lang: 'pe-creative',
-                link: '/auth/two-step-verification-creative',
+            },
+            {
+                title: 'Rate (General)',
+                lang: 'pe-rate-general',
+                link: '/master/rate-general',
                 dropdownPosition: null,
                 children: [],
-              },
-            ],
-          },
-          {
-            title: 'Reset Password',
-            link: '#',
-            lang: 'pe-reset-password',
-            children: [
-              {
-                title: 'Basic',
-                lang: 'pe-basic',
-                link: '/auth/reset-password-basic',
-                dropdownPosition: null,
-                children: [],
-              },
-              {
-                title: 'Modern',
-                lang: 'pe-modern',
-                link: '/auth/reset-password-modern',
-                dropdownPosition: null,
-                children: [],
-              },
-              {
-                title: 'Creative',
-                lang: 'pe-creative',
-                link: '/auth/reset-password-creative',
-                dropdownPosition: null,
-                children: [],
-              },
-            ],
-          },
-          {
-            title: 'Successful Password',
-            link: '#',
-            lang: 'pe-successful-password',
-            children: [
-              {
-                title: 'Basic',
-                lang: 'pe-basic',
-                link: '/auth/successful-password-basic',
-                dropdownPosition: null,
-                children: [],
-              },
-              {
-                title: 'Modern',
-                lang: 'pe-modern',
-                link: '/auth/successful-password-modern',
-                dropdownPosition: null,
-                children: [],
-              },
-              {
-                title: 'Creative',
-                lang: 'pe-creative',
-                link: '/auth/successful-password-creative',
-                dropdownPosition: null,
-                children: [],
-              },
-            ],
-          },
-          {
-            title: 'Account Deactivation',
-            link: '#',
-            lang: 'pe-account-deactivation',
-            children: [
-              {
-                title: 'Basic',
-                lang: 'pe-basic',
-                link: '/auth/account-deactivation-basic',
-                dropdownPosition: null,
-                children: [],
-              },
-              {
-                title: 'Modern',
-                lang: 'pe-modern',
-                link: '/auth/account-deactivation-modern',
-                dropdownPosition: null,
-                children: [],
-              },
-              {
-                title: 'Creative',
-                lang: 'pe-creative',
-                link: '/auth/account-deactivation-creative',
-                dropdownPosition: null,
-                children: [],
-              },
-            ],
-          },
+            },
         ],
-      },
+    },
 ]
 
 export { menu }
