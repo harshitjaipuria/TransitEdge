@@ -161,7 +161,7 @@ const Sidebar = ({
             {/* Sidebar content goes here */}
             <div className="sidebar-wrapper">
               <div>
-                <div className="navbar-brand">
+                <div className="navbar-brand flex justify-center p-0">
                   <Link
                     href="#!"
                     className="inline-flex items-center justify-center w-full"
@@ -171,7 +171,7 @@ const Sidebar = ({
                         src={mainLogo}
                         aria-label="logo"
                         alt="logo"
-                        className="h-6 mx-auto group-data-[sidebar-colors=light]:dark:hidden group-data-[sidebar-colors=dark]:hidden group-data-[sidebar-colors=brand]:hidden group-data-[sidebar-colors=purple]:hidden group-data-[sidebar-colors=sky]:hidden"
+                        className="h-6 mx-auto ml-4 group-data-[sidebar-colors=light]:dark:hidden group-data-[sidebar-colors=dark]:hidden group-data-[sidebar-colors=brand]:hidden group-data-[sidebar-colors=purple]:hidden group-data-[sidebar-colors=sky]:hidden"
                         width={132}
                         height={24}
                       />
@@ -179,7 +179,7 @@ const Sidebar = ({
                         src={logoWhite}
                         aria-label="logo"
                         alt="logo"
-                        className="h-6 mx-auto group-data-[sidebar-colors=light]:hidden group-data-[sidebar-colors=light]:dark:inline-block"
+                        className="h-6 mx-auto ml-4 group-data-[sidebar-colors=light]:hidden group-data-[sidebar-colors=light]:dark:inline-block"
                         width={132}
                         height={24}
                       />
