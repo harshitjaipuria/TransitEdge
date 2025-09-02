@@ -136,16 +136,6 @@ const Topbar: React.FC<TopBarProps> = ({ searchMenu, searchText, toggleSidebar }
                         </div>
 
                         <div className='flex items-center gap-2 ltr:ml-auto rtl:mr-auto'>
-                            {/* Settings (Layout modal) */}
-                            <button
-                                className='hidden topbar-link md:flex'
-                                title='topbar-link'
-                                type='button'
-                                onClick={handleThemeModal}
-                            >
-                                <Settings className='size-4'></Settings>
-                            </button>
-
                             {/* Light & Dark Modal */}
                             <button
                                 className='topbar-link'
@@ -166,124 +156,7 @@ const Topbar: React.FC<TopBarProps> = ({ searchMenu, searchText, toggleSidebar }
                                     <Sun className={'size-4 '} />
                                 )}
                             </button>
-                            <button
-                                className='relative hidden topbar-link sm:flex'
-                                title='shopping-cart'
-                                data-drawer-target='basicEnd'
-                                onClick={handleOpenCardModal}
-                            >
-                                <ShoppingBag className='size-4' />
-                                <span className='absolute right-0 p-0 border-2 border-white rounded-full dark:border-dark-900 badge badge-square badge-solid-red top-3.5 size-5'>
-                                    3
-                                </span>
-                            </button>
-                            {/* Tool Apps */}
-                            <button
-                                className='hidden topbar-link sm:flex'
-                                title='tools-apps-modal'
-                                data-modal-target='toolsAppsModal'
-                                onClick={handleOpenModal}
-                            >
-                                <LayoutGrid className='size-4'></LayoutGrid>
-                            </button>
-
-                            {/* Notifications */}
-
-                            <Dropdown position='right' trigger='click' dropdownClassName='dropdown'>
-                                <DropdownButton colorClass='topbar-link'>
-                                    <span className='relative'>
-                                        <BellRing className='size-4'></BellRing>
-                                        <div className='absolute top-0 -mt-1 bg-green-500 rounded-full ltr:-mr-1 rtl:-ml-1 ltr:right-0 rtl:left-0 size-2 animate-ping'></div>
-                                        <div className='absolute top-0 -mt-1 bg-green-500 rounded-full ltr:-mr-1 rtl:-ml-1 ltr:right-0 rtl:left-0 size-2'></div>
-                                    </span>
-                                </DropdownButton>
-                                <DropdownMenu menuClass='!w-96'>
-                                    <div className='flex items-center gap-3 p-4'>
-                                        <h6 className='grow'>Notification (4)</h6>
-                                        <Link href='#!' className='text-sm shrink-0 link link-primary'>
-                                            Mark All as read
-                                        </Link>
-                                    </div>
-                                    <div className='py-4 border-t border-gray-200 dark:border-dark-800'>
-                                        <SimpleBar>
-                                            <div className='space-y-3 px-3'>
-                                                <Link
-                                                    href='#!'
-                                                    className='relative flex gap-3 p-2 transition duration-300 ease-linear rounded-md hover:bg-gray-100 [&.unread]:bg-gray-100 dark:[&.unread]:bg-dark-850 dark:hover:bg-dark-850 unread'
-                                                >
-                                                    <Image
-                                                        src={user10}
-                                                        alt='userImg'
-                                                        className='rounded-full size-7 shrink-0'
-                                                    />
-                                                    <div className='grow'>
-                                                        <p className='mb-0.5 text-sm'>
-                                                            <span className='font-medium'>Donna Berlin</span> wants to edit Domiex
-                                                            Admin & dashboards
-                                                        </p>
-                                                        <p className='text-xs text-gray-500 dark:text-dark-500'>5 min ago</p>
-                                                    </div>
-                                                </Link>
-                                                <Link
-                                                    href='#!'
-                                                    className='relative flex gap-3 p-2 transition duration-300 ease-linear rounded-md hover:bg-gray-100 [&.unread]:bg-gray-100 dark:[&.unread]:bg-dark-850 dark:hover:bg-dark-850'
-                                                >
-                                                    <Image
-                                                        src={user11}
-                                                        alt='userImg'
-                                                        className='rounded-full size-7 shrink-0'
-                                                    />
-                                                    <div className='grow'>
-                                                        <p className='mb-0.5 text-sm'>
-                                                            <span className='font-medium'>Liam Clark</span> commented in domiex
-                                                        </p>
-                                                        <p className='text-xs text-gray-500 dark:text-dark-500'>8 min ago</p>
-                                                        <p className='mt-3 text-sm line-clamp-2'>
-                                                            &quot; Greetings, I&apos;m making blazor web assembly app / MAUI. Does
-                                                            your template available for this? &quot;
-                                                        </p>
-                                                    </div>
-                                                </Link>
-                                                <Link
-                                                    href='#!'
-                                                    className='relative flex gap-3 p-2 transition duration-300 ease-linear rounded-md hover:bg-gray-100 [&.unread]:bg-gray-100 dark:[&.unread]:bg-dark-850 dark:hover:bg-dark-850'
-                                                >
-                                                    <div className='flex items-center justify-center text-xs text-gray-500 bg-gray-100 rounded-full size-7 shrink-0'>
-                                                        LN
-                                                    </div>
-                                                    <div className='grow'>
-                                                        <p className='mb-0.5 text-sm'>
-                                                            <span className='font-medium'>Lucas Nguyen</span> competed create new
-                                                            components
-                                                        </p>
-                                                        <p className='text-xs text-gray-500 dark:text-dark-500'>01:15 PM</p>
-                                                    </div>
-                                                </Link>
-                                                <Link
-                                                    href='#!'
-                                                    className='relative flex gap-3 p-2 transition duration-300 ease-linear rounded-md hover:bg-gray-100 [&.unread]:bg-gray-100 dark:[&.unread]:bg-dark-850 dark:hover:bg-dark-850'
-                                                >
-                                                    <Image
-                                                        src={user18}
-                                                        alt='userImg'
-                                                        className='rounded-full size-7 shrink-0'
-                                                    />
-                                                    <div className='grow'>
-                                                        <p className='mb-0.5 text-sm'>
-                                                            <span className='font-medium'>James Taylor</span> marked your order.
-                                                        </p>
-                                                        <span className='mb-2 badge badge-primary'>Completed</span>
-                                                        <p className='text-xs text-gray-500 dark:text-dark-500'>03:57 AM</p>
-                                                    </div>
-                                                </Link>
-                                            </div>
-                                        </SimpleBar>
-                                    </div>
-                                </DropdownMenu>
-                            </Dropdown>
-                            {/* Internationalization */}
-                            <LanguageDropdown />
-
+                            
                             {/* Schedule */}
                             <button
                                 type='button'
