@@ -3,35 +3,10 @@ import detector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
 import translationEn from '@src/json/lang/en.json'
-import translationEs from '@src/json/lang/es.json'
-import translationFr from '@src/json/lang/fr.json'
-import translationRu from '@src/json/lang/ru.json'
-import translationDe from '@src/json/lang/de.json'
-import translationIt from '@src/json/lang/it.json'
-import translationZh from '@src/json/lang/zh.json'
-import translationAr from '@src/json/lang/ar.json'
-import translationTr from '@src/json/lang/tr.json'
-import translationHe from '@src/json/lang/he.json'
-import translationVi from '@src/json/lang/vi.json'
-import translationNl from '@src/json/lang/nl.json'
-import translationKo from '@src/json/lang/ko.json'
-import translationPt from '@src/json/lang/pt.json'
+
 
 const resources = {
   en: { translation: translationEn },
-  es: { translation: translationEs },
-  fr: { translation: translationFr },
-  ru: { translation: translationRu },
-  de: { translation: translationDe },
-  it: { translation: translationIt },
-  zh: { translation: translationZh },
-  ar: { translation: translationAr },
-  tr: { translation: translationTr },
-  he: { translation: translationHe },
-  vi: { translation: translationVi },
-  nl: { translation: translationNl },
-  ko: { translation: translationKo },
-  pt: { translation: translationPt },
 }
 
 i18n
@@ -39,7 +14,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    // lng: localStorage.getItem("I18N_LANGUAGE") || "en",
+    lng: 'en',
     fallbackLng: 'en',
     keySeparator: false,
     interpolation: {

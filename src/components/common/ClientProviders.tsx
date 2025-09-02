@@ -1,6 +1,7 @@
 'use client'
 import { Provider } from 'react-redux'
 import store from '@src/slices/reducer'
+import '@src/utils/i18n'
 import {
 
   changeLayoutMode,
