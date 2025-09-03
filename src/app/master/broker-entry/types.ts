@@ -15,6 +15,8 @@ export interface BrokerFormData {
   contactNumber: string
   email: string
   address: string
+  panNo: string
+  gstIn: string
 }
 
 export interface BrokerListProps {
@@ -93,6 +95,8 @@ export interface BrokerCreateRequest {
   contactNumber: string
   email: string
   address: string
+  panNo: string
+  gstIn: string
 }
 
 export interface BrokerUpdateRequest extends Partial<BrokerCreateRequest> {
@@ -109,6 +113,8 @@ export interface BrokerFormErrors {
   contactNumber?: string
   email?: string
   address?: string
+  panNo?: string
+  gstIn?: string
 }
 
 export interface BrokerFormState {

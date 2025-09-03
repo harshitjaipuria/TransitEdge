@@ -132,16 +132,16 @@ const BrokerEntryPage = () => {
     <Layout breadcrumbTitle="Broker Entry">
       <div className="container mx-auto p-6">
         <BrokerEntryCard>
-          {/* Header Component */}
-          <BrokerHeader
-            title="Broker Management"
-            subtitle="Manage and organize your broker information"
-            onAddNew={handleAddNew}
-            showAddButton={!showForm}
-          />
-
           {!showForm ? (
             <>
+              {/* Header Component - Only show on main page */}
+              <BrokerHeader
+                title="Broker Management"
+                subtitle="Manage and organize your broker information"
+                onAddNew={handleAddNew}
+                showAddButton={true}
+              />
+
               {/* Search Component */}
               <div className="mb-6">
                 <BrokerSearch

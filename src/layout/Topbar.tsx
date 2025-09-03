@@ -62,47 +62,6 @@ const Topbar = ({ searchText, searchMenu, toggleSidebar }: TopbarProps) => {
                 />
               </Link>
             </div>
-
-            <button
-              onClick={() => toggleSidebar()}
-              className="sidebar-toggle group-data-[layout=horizontal]:lg:hidden ml-4"
-              title="sidebar-toggle"
-            >
-              <PanelRightOpen className="size-4" />
-            </button>
-
-            <div className="flex items-center gap-2 ml-auto mr-6">
-              {/* Light & Dark Modal */}
-              <button
-                className="topbar-link"
-                title="Toggle Layout Mode"
-                onClick={() =>
-                  handlChangeLayoutMode(
-                    layoutMode === LAYOUT_MODE_TYPES.LIGHT
-                      ? LAYOUT_MODE_TYPES.DARK
-                      : LAYOUT_MODE_TYPES.LIGHT
-                  )
-                }
-              >
-                {layoutMode === LAYOUT_MODE_TYPES.LIGHT ||
-                layoutMode === LAYOUT_MODE_TYPES.DEFAULT ||
-                layoutMode === LAYOUT_MODE_TYPES.BLACK_WHITE ? (
-                  <Moon className="size-4" />
-                ) : (
-                  <Sun className="size-4" />
-                )}
-              </button>
-
-              {/* Schedule */}
-              <button
-                type="button"
-                title="topbar-link"
-                className="items-center justify-center hidden px-2 link link-primary group-data-[nav-type=pattern]:text-white/75 group-data-[nav-type=pattern]:border-primary-400 border border-gray-200 rounded-md md:flex dark:border-dark-800 h-9"
-              >
-                <CalendarRange className="ltr:md:mr-2 rtl:md:ml-2 size-4" />
-                <span className="hidden md:inline-block">Schedule</span>
-              </button>
-            </div>
           </div>
         </div>
       </div>
