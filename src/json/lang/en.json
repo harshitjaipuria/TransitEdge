@@ -2,7 +2,7 @@
   "pe-dashboards": "Dashboards",
   "pe-master": "Master",
   "pe-broker-entry": "Broker Entry",
-  "pe-deliver-entry": "Deliver Entry",
+  "pe-driver-entry": "Driver Entry",
   "pe-owner-entry": "Owner Entry",
   "pe-packing-method": "Packing Method",
   "pe-client": "Client",

@@ -16,9 +16,9 @@ const menu: MegaMenu[] = [
                 children: [],
             },
             {
-                title: 'Deliver Entry',
-                lang: 'pe-deliver-entry',
-                link: '/master/deliver-entry',
+                title: 'Driver Entry',
+                lang: 'pe-driver-entry',
+                link: '/master/driver-entry',
                 dropdownPosition: null,
                 children: [],
             },
