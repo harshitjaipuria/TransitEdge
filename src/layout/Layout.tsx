@@ -1,6 +1,5 @@
 "use client";
 import React, { useCallback, useEffect, useState } from "react";
-import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@src/slices/reducer";
 import { changeSidebarSize } from "@src/slices/thunk";
@@ -219,7 +218,6 @@ export default function Layout({
         <div className="page-wrapper pt-[calc(theme('spacing.topbar')_*_1.2)]">
           {children}
         </div>
-        <Footer />
       </div>
     </React.Fragment>
   );

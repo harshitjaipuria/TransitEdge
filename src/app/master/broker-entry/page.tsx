@@ -1,109 +1,185 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '@src/layout/Layout'
+import {
+  BrokerHeader,
+  BrokerSearch,
+  BrokerList,
+  BrokerForm,
+  BrokerEntryCard
+} from './components'
+import { Broker, BrokerFormData } from './types'
 
 const BrokerEntryPage = () => {
+  // Sample data for demonstration
+  const [brokers, setBrokers] = useState<Broker[]>([
+    {
+      id: '1',
+      name: 'ABC Brokerage',
+      contactNumber: '+1 234-567-8900',
+      email: 'info@abcbrokerage.com',
+      address: '123 Main Street, New York, NY 10001',
+      createdAt: new Date('2024-01-15'),
+      updatedAt: new Date('2024-01-15'),
+      isActive: true
+    },
+    {
+      id: '2',
+      name: 'XYZ Trading',
+      contactNumber: '+1 234-567-8901',
+      email: 'contact@xyztrading.com',
+      address: '456 Business Ave, Los Angeles, CA 90210',
+      createdAt: new Date('2024-02-20'),
+      updatedAt: new Date('2024-02-20'),
+      isActive: true
+    },
+    {
+      id: '3',
+      name: 'Global Brokers',
+      contactNumber: '+1 234-567-8902',
+      email: 'support@globalbrokers.com',
+      address: '789 Finance Blvd, Chicago, IL 60601',
+      createdAt: new Date('2024-03-10'),
+      updatedAt: new Date('2024-03-10'),
+      isActive: false
+    }
+  ])
+
+  const [filteredBrokers, setFilteredBrokers] = useState<Broker[]>(brokers)
+  const [showForm, setShowForm] = useState(false)
+  const [editingBroker, setEditingBroker] = useState<Broker | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleSearch = (query: string) => {
+    if (!query.trim()) {
+      setFilteredBrokers(brokers)
+    } else {
+      const filtered = brokers.filter(broker =>
+        broker.name.toLowerCase().includes(query.toLowerCase()) ||
+        broker.email.toLowerCase().includes(query.toLowerCase()) ||
+        broker.contactNumber.includes(query)
+      )
+      setFilteredBrokers(filtered)
+    }
+  }
+
+  const handleAddNew = () => {
+    setEditingBroker(null)
+    setShowForm(true)
+  }
+
+  const handleEdit = (broker: Broker) => {
+    setEditingBroker(broker)
+    setShowForm(true)
+  }
+
+  const handleDelete = (id: string) => {
+    setBrokers(prev => prev.filter(broker => broker.id !== id))
+    setFilteredBrokers(prev => prev.filter(broker => broker.id !== id))
+  }
+
+  const handleView = (broker: Broker) => {
+    console.log('Viewing broker:', broker)
+    // Implement view functionality
+  }
+
+  const handleFormSubmit = async (data: BrokerFormData) => {
+    setIsLoading(true)
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    if (editingBroker) {
+      // Update existing broker
+      const updatedBroker: Broker = {
+        ...editingBroker,
+        ...data,
+        updatedAt: new Date()
+      }
+      
+      setBrokers(prev => prev.map(broker => 
+        broker.id === editingBroker.id ? updatedBroker : broker
+      ))
+      setFilteredBrokers(prev => prev.map(broker => 
+        broker.id === editingBroker.id ? updatedBroker : broker
+      ))
+    } else {
+      // Add new broker
+      const newBroker: Broker = {
+        id: Date.now().toString(),
+        ...data,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isActive: true
+      }
+      
+      setBrokers(prev => [...prev, newBroker])
+      setFilteredBrokers(prev => [...prev, newBroker])
+    }
+    
+    setIsLoading(false)
+    setShowForm(false)
+    setEditingBroker(null)
+  }
+
+  const handleFormCancel = () => {
+    setShowForm(false)
+    setEditingBroker(null)
+  }
+
   return (
     <Layout breadcrumbTitle="Broker Entry">
       <div className="container mx-auto p-6">
-        <div className="bg-white dark:bg-dark-800 rounded-lg shadow-lg p-8">
-          <div className="mb-6">
-            <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
-              Broker Entry
-            </h1>
-            <p className="text-gray-600 dark:text-gray-300">
-              Manage broker information and entries in the system.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Broker Information Form */}
-            <div className="bg-gray-50 dark:bg-dark-700 p-6 rounded-lg">
-              <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
-                Broker Information
-              </h2>
-              <form className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Broker Name
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-600 dark:text-white"
-                    placeholder="Enter broker name"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Contact Number
-                  </label>
-                  <input
-                    type="tel"
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-600 dark:text-white"
-                    placeholder="Enter contact number"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-600 dark:text-white"
-                    placeholder="Enter email address"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Address
-                  </label>
-                  <textarea
-                    rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-dark-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-600 dark:text-white"
-                    placeholder="Enter broker address"
-                  />
-                </div>
-                
-                <button
-                  type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200"
-                >
-                  Add Broker
-                </button>
-              </form>
-            </div>
-            
-            {/* Broker List */}
-            <div className="bg-gray-50 dark:bg-dark-700 p-6 rounded-lg">
-              <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
-                Broker List
-              </h2>
-              <div className="space-y-3">
-                <div className="bg-white dark:bg-dark-600 p-4 rounded-md border border-gray-200 dark:border-dark-500">
-                  <h3 className="font-medium text-gray-800 dark:text-white">ABC Brokerage</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Contact: +1 234-567-8900</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Email: info@abcbrokerage.com</p>
-                </div>
-                
-                <div className="bg-white dark:bg-dark-600 p-4 rounded-md border border-gray-200 dark:border-dark-500">
-                  <h3 className="font-medium text-gray-800 dark:text-white">XYZ Trading</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Contact: +1 234-567-8901</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Email: contact@xyztrading.com</p>
-                </div>
-                
-                <div className="bg-white dark:bg-dark-600 p-4 rounded-md border border-gray-200 dark:border-dark-500">
-                  <h3 className="font-medium text-gray-800 dark:text-white">Global Brokers</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Contact: +1 234-567-8902</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Email: support@globalbrokers.com</p>
-                </div>
+        <BrokerEntryCard>
+          {/* Header Component */}
+          <BrokerHeader
+            title="Broker Management"
+            subtitle="Manage and organize your broker information"
+            onAddNew={handleAddNew}
+            showAddButton={!showForm}
+          />
+
+          {!showForm ? (
+            <>
+              {/* Search Component */}
+              <div className="mb-6">
+                <BrokerSearch
+                  onSearch={handleSearch}
+                  placeholder="Search brokers by name, email, or phone..."
+                />
+              </div>
+
+              {/* List Component */}
+              <BrokerList
+                brokers={filteredBrokers}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+                onView={handleView}
+              />
+            </>
+          ) : (
+            /* Form Component */
+            <div className="mx-auto">
+              <div className="bg-gray-50 dark:bg-dark-700 p-6 rounded-lg">
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+                  {editingBroker ? 'Edit Broker' : 'Add New Broker'}
+                </h2>
+                <BrokerForm
+                  onSubmit={handleFormSubmit}
+                  onCancel={handleFormCancel}
+                  initialData={editingBroker ? {
+                    name: editingBroker.name,
+                    contactNumber: editingBroker.contactNumber,
+                    email: editingBroker.email,
+                    address: editingBroker.address
+                  } : undefined}
+                  isLoading={isLoading}
+                />
               </div>
             </div>
-          </div>
-        </div>
+          )}
+        </BrokerEntryCard>
       </div>
     </Layout>
   )
