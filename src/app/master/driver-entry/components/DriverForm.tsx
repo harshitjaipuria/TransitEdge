@@ -48,7 +48,7 @@ const DriverForm: React.FC<DriverFormProps> = ({
       }
     }
 
-    // Father name must not be empty yes its true
+    // Father name must not be empty
     if (!formData.fatherName.trim()) {
       newErrors.fatherName = 'Father name is required'
     }
@@ -204,7 +204,7 @@ const DriverForm: React.FC<DriverFormProps> = ({
         </div>
       </div>
 
-      {/* Third Row: 2-column grid */}
+      {/* Third Row: 2-column grid for better referance*/}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
