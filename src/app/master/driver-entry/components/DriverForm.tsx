@@ -48,7 +48,7 @@ const DriverForm: React.FC<DriverFormProps> = ({
       }
     }
 
-    // Father name must not be empty
+    // Father name must not be empty yes its true
     if (!formData.fatherName.trim()) {
       newErrors.fatherName = 'Father name is required'
     }
