@@ -245,7 +245,7 @@ const DriverForm: React.FC<DriverFormProps> = ({
         </div>
       </div>
 
-      {/* Button Row */}
+      {/* Button Row of the page*/}
       <div className="flex gap-3 pt-4">
         <button
           type="submit"
