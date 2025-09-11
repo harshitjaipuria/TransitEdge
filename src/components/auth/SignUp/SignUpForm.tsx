@@ -12,8 +12,10 @@ import type { CommonProps } from '@/@types/common'
 
 type SignUpFormSchema = {
     userName: string
+    phone: string
     password: string
     email: string
+    branch: string
     confirmPassword: string
 }
 
@@ -33,7 +35,15 @@ interface SignUpFormProps extends CommonProps {
 const validationSchema: ZodType<SignUpFormSchema> = z
     .object({
         email: z.string({ required_error: 'Please enter your email' }),
-        userName: z.string({ required_error: 'Please enter your name' }),
+        userName: z
+            .string({ required_error: 'Please enter your full name' })
+            .min(1, 'Please enter your full name'),
+        phone: z
+            .string({ required_error: 'Please enter your mobile number' })
+            .min(1, 'Please enter your mobile number'),
+        branch: z
+            .string({ required_error: 'Please enter your branch' })
+            .min(1, 'Please enter your branch'),
         password: z.string({ required_error: 'Password Required' }),
         confirmPassword: z.string({
             required_error: 'Confirm Password Required',
@@ -51,7 +61,6 @@ const SignUpForm = (props: SignUpFormProps) => {
 
     const {
         handleSubmit,
-        formState: { errors },
         control,
     } = useForm<SignUpFormSchema>({
         resolver: zodResolver(validationSchema),
@@ -66,86 +75,120 @@ const SignUpForm = (props: SignUpFormProps) => {
     return (
         <div className={className}>
             <Form onSubmit={handleSubmit(handleSignUp)}>
-                <FormItem
-                    label="User name"
-                    invalid={Boolean(errors.userName)}
-                    errorMessage={errors.userName?.message}
-                >
-                    <Controller
-                        name="userName"
-                        control={control}
-                        render={({ field }) => (
-                            <Input
-                                type="text"
-                                placeholder="User Name"
-                                autoComplete="off"
-                                {...field}
-                            />
-                        )}
-                    />
-                </FormItem>
-                <FormItem
-                    label="Email"
-                    invalid={Boolean(errors.email)}
-                    errorMessage={errors.email?.message}
-                >
-                    <Controller
-                        name="email"
-                        control={control}
-                        render={({ field }) => (
-                            <Input
-                                type="email"
-                                placeholder="Email"
-                                autoComplete="off"
-                                {...field}
-                            />
-                        )}
-                    />
-                </FormItem>
-                <FormItem
-                    label="Password"
-                    invalid={Boolean(errors.password)}
-                    errorMessage={errors.password?.message}
-                >
-                    <Controller
-                        name="password"
-                        control={control}
-                        render={({ field }) => (
-                            <Input
-                                type="password"
-                                autoComplete="off"
-                                placeholder="Password"
-                                {...field}
-                            />
-                        )}
-                    />
-                </FormItem>
-                <FormItem
-                    label="Confirm Password"
-                    invalid={Boolean(errors.confirmPassword)}
-                    errorMessage={errors.confirmPassword?.message}
-                >
-                    <Controller
-                        name="confirmPassword"
-                        control={control}
-                        render={({ field }) => (
-                            <Input
-                                type="password"
-                                autoComplete="off"
-                                placeholder="Confirm Password"
-                                {...field}
-                            />
-                        )}
-                    />
-                </FormItem>
-                <Button
-                    block
-                    loading={isSubmitting}
-                    variant="solid"
-                    type="submit"
-                >
-                    {isSubmitting ? 'Creating Account...' : 'Sign Up'}
-                </Button>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    <FormItem
+                        label="Full Name"
+                        extra={<span className="text-red-500 ltr:ml-1">*</span>}
+                    >
+                        <Controller
+                            name="userName"
+                            control={control}
+                            render={({ field }) => (
+                                <Input
+                                    type="text"
+                                    placeholder="Full Name"
+                                    autoComplete="off"
+                                    {...field}
+                                />
+                            )}
+                        />
+                    </FormItem>
+                    <FormItem
+                        label="Mobile Number"
+                        extra={<span className="text-red-500 ltr:ml-1">*</span>}
+                    >
+                        <Controller
+                            name="phone"
+                            control={control}
+                            render={({ field }) => (
+                                <Input
+                                    type="tel"
+                                    placeholder="Mobile Number"
+                                    autoComplete="tel"
+                                    {...field}
+                                />
+                            )}
+                        />
+                    </FormItem>
+                    <FormItem
+                        label="Email"
+                        extra={<span className="text-red-500 ltr:ml-1">*</span>}
+                    >
+                        <Controller
+                            name="email"
+                            control={control}
+                            render={({ field }) => (
+                                <Input
+                                    type="email"
+                                    placeholder="Email"
+                                    autoComplete="off"
+                                    {...field}
+                                />
+                            )}
+                        />
+                    </FormItem>
+                    <FormItem
+                        label="Branch"
+                        extra={<span className="text-red-500 ltr:ml-1">*</span>}
+                    >
+                        <Controller
+                            name="branch"
+                            control={control}
+                            render={({ field }) => (
+                                <Input
+                                    type="text"
+                                    placeholder="Branch"
+                                    autoComplete="off"
+                                    {...field}
+                                />
+                            )}
+                        />
+                    </FormItem>
+                    <FormItem
+                        label="Password"
+                        extra={<span className="text-red-500 ltr:ml-1">*</span>}
+                    >
+                        <Controller
+                            name="password"
+                            control={control}
+                            render={({ field }) => (
+                                <Input
+                                    type="password"
+                                    autoComplete="off"
+                                    placeholder="Password"
+                                    {...field}
+                                />
+                            )}
+                        />
+                    </FormItem>
+                    <FormItem
+                        label="Confirm Password"
+                        extra={<span className="text-red-500 ltr:ml-1">*</span>}
+                    >
+                        <Controller
+                            name="confirmPassword"
+                            control={control}
+                            render={({ field }) => (
+                                <Input
+                                    type="password"
+                                    autoComplete="off"
+                                    placeholder="Confirm Password"
+                                    {...field}
+                                />
+                            )}
+                        />
+                    </FormItem>
+                    <div className="md:col-span-2">
+                        <Button
+                            block
+                            loading={isSubmitting}
+                            variant="solid"
+                            type="submit"
+                        >
+                            {isSubmitting ? 'Creating Account...' : 'Sign Up'}
+                        </Button>
+                    </div>
+                </div>
             </Form>
         </div>
     )

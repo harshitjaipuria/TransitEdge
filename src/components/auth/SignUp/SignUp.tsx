@@ -21,17 +21,9 @@ export const SignUp = ({ onSignUp, signInUrl = '/sign-in' }: SignUpProps) => {
     return (
         <>
             <div className="mb-8">
-                <Logo
-                    type="streamline"
-                    mode={mode}
-                    logoWidth={60}
-                    logoHeight={60}
-                />
-            </div>
-            <div className="mb-8">
                 <h3 className="mb-1">Sign Up</h3>
                 <p className="font-semibold heading-text">
-                    And lets get started with your free trial
+                  Create Your Transport Account – Drive Efficiency Today
                 </p>
             </div>
             {message && (

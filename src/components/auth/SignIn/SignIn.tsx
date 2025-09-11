@@ -29,14 +29,6 @@ const SignIn = ({
 
     return (
         <>
-            <div className="mb-8">
-                <Logo
-                    type="streamline"
-                    mode={mode}
-                    logoWidth={60}
-                    logoHeight={60}
-                />
-            </div>
             <div className="mb-10">
                 <h2 className="mb-2">Welcome back!</h2>
                 <p className="font-semibold heading-text">

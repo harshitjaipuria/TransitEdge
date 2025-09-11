@@ -6,6 +6,7 @@ import SignUp from '@/components/auth/SignUp'
 import { apiSignUp } from '@/services/AuthService'
 import { useRouter } from 'next/navigation'
 import type { OnSignUpPayload } from '@/components/auth/SignUp'
+import type { AxiosError } from 'axios'
 
 const SignUpClient = () => {
     const router = useRouter()
@@ -25,7 +26,10 @@ const SignUpClient = () => {
             )
             router.push('/sign-in')
         } catch (error) {
-            setMessage(error as string)
+            const err = error as AxiosError<{ message?: string }>
+            const apiMessage = err.response?.data?.message
+            const fallback = err.message || 'Request failed'
+            setMessage(apiMessage || fallback)
         } finally {
             setSubmitting(false)
         }
