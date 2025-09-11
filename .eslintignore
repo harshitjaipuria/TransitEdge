@@ -1,0 +1,10 @@
+# Ignore node_modules and build outputs
+node_modules
+.next
+
+# Ignore Prisma generated client
+src/generated/prisma
+
+# Ignore any other generated artifacts
+**/*.gen.*
+**/__generated__/**

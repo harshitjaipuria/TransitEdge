@@ -14,10 +14,10 @@ import { getPlacementTransition } from './transition'
 import { PLACEMENT } from '../utils/constants'
 import { createRoot } from 'react-dom/client'
 import { NotificationPlacement } from '../@types/placement'
-import type { DetailedReactHTMLElement, ReactNode, Ref } from 'react'
+import type { DetailedReactHTMLElement, ReactElement, ReactNode, Ref, RefObject } from 'react'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type NodeProps = DetailedReactHTMLElement<any, HTMLDivElement>
+export type NodeProps = ReactElement<any>
 
 type Message = {
     key: string
@@ -97,6 +97,10 @@ export interface ToastWrapperProps extends ToastProps {
     wrapper?: HTMLElement | (() => HTMLElement)
 }
 
+export type ToastWrapperGetInstanceReturn = Promise<
+    [RefObject<ToastWrapperInstance | null>, () => void]
+>
+
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 const ToastWrapper = (props: ToastWrapperProps) => {
     const rootRef = useRef<HTMLDivElement | null>(null)
@@ -147,10 +151,10 @@ const ToastWrapper = (props: ToastWrapperProps) => {
                         ...toastProps,
                         ref,
                         onClose: chainedFunction(
-                            item.node?.props?.onClose,
+                            (item.node as any)?.props?.onClose,
                             () => remove(item.key),
                         ),
-                        className: classNames(item.node?.props?.className),
+                        className: classNames((item.node as any)?.props?.className),
                     },
                 )}
             </motion.div>
@@ -172,7 +176,7 @@ const ToastWrapper = (props: ToastWrapperProps) => {
     )
 }
 
-ToastWrapper.getInstance = (props: ToastWrapperProps) => {
+ToastWrapper.getInstance = (props: ToastWrapperProps): ToastWrapperGetInstanceReturn => {
     const { wrapper, ...rest } = props
 
     const wrapperRef = createRef<ToastWrapperInstance>()
@@ -203,7 +207,7 @@ ToastWrapper.getInstance = (props: ToastWrapperProps) => {
                 ref={wrapperRef}
                 callback={renderCallback}
             />,
-        )
+        ) as unknown as { unmount: () => void }
     })
 }
 

@@ -5,6 +5,7 @@ import {
     PiBookBookmarkDuotone,
     PiAcornDuotone,
     PiBagSimpleDuotone,
+    PiTruckDuotone,
 } from 'react-icons/pi'
 import type { JSX } from 'react'
 
@@ -17,6 +18,7 @@ const navigationIcon: NavigationIcons = {
     groupSingleMenu: <PiBookOpenUserDuotone />,
     groupCollapseMenu: <PiBookBookmarkDuotone />,
     groupMenu: <PiBagSimpleDuotone />,
+    fleet: <PiTruckDuotone />,
 }
 
 export default navigationIcon

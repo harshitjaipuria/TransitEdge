@@ -1,12 +1,10 @@
 'use client'
 
-import Logo from '@/components/template/Logo'
 import Alert from '@/components/ui/Alert'
 import SignInForm from './SignInForm'
 import OauthSignIn from './OauthSignIn'
 import ActionLink from '@/components/shared/ActionLink'
 import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
-import useTheme from '@/utils/hooks/useTheme'
 import type { OnSignIn } from './SignInForm'
 import type { OnOauthSignIn } from './OauthSignIn'
 
@@ -24,8 +22,6 @@ const SignIn = ({
     onOauthSignIn,
 }: SignInProps) => {
     const [message, setMessage] = useTimeOutMessage()
-
-    const mode = useTheme((state) => state.mode)
 
     return (
         <>

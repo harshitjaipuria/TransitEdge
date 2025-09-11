@@ -1,11 +1,9 @@
 'use client'
 
-import Logo from '@/components/template/Logo'
 import Alert from '@/components/ui/Alert'
 import SignUpForm from './SignUpForm'
 import ActionLink from '@/components/shared/ActionLink'
 import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
-import useTheme from '@/utils/hooks/useTheme'
 import type { OnSignUp } from './SignUpForm'
 
 type SignUpProps = {
@@ -16,7 +14,6 @@ type SignUpProps = {
 export const SignUp = ({ onSignUp, signInUrl = '/sign-in' }: SignUpProps) => {
     const [message, setMessage] = useTimeOutMessage()
 
-    const mode = useTheme((state) => state.mode)
 
     return (
         <>
