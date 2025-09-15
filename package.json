@@ -94,6 +94,7 @@
     "eslint-plugin-react": "^7.35.2",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.11",
+    "pm2": "^6.0.10",
     "postcss": "^8.4.45",
     "postcss-nesting": "^13.0.0",
     "prettier": "^3.4.2",
