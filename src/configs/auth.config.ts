@@ -1,5 +1,4 @@
 import type { NextAuthConfig } from 'next-auth'
-import validateCredential from '../server/actions/user/validateCredential'
 import Credentials from 'next-auth/providers/credentials'
 import Github from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
@@ -19,9 +18,10 @@ export default {
         Credentials({
             async authorize(credentials) {
                 /** validate credentials from backend here */
-                const user = await validateCredential(
-                    credentials as SignInCredential,
+                const { default: validateCredential } = await import(
+                    '@/server/actions/user/validateCredential'
                 )
+                const user = await validateCredential(credentials as SignInCredential)
                 if (!user) {
                     return null
                 }
