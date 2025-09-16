@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef, useState } from 'react'
 import classNames from 'classnames'
 import useMergedRef from '../hooks/useMergeRef'

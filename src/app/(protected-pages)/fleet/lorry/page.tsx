@@ -12,3 +12,4 @@ const LorryPage = () => {
 export default LorryPage
 
 
+

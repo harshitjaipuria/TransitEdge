@@ -1,3 +1,4 @@
+'use client'
 import { createContext, useContext } from 'react'
 import { SIZES } from '../utils/constants'
 import type { TypeAttributes } from '../@types/common'

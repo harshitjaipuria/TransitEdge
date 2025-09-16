@@ -1,3 +1,4 @@
+'use client'
 import { useContext, useCallback, useState } from 'react'
 import classNames from 'classnames'
 import CheckboxGroupContext from './context'

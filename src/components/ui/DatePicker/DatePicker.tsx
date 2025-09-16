@@ -1,3 +1,4 @@
+'use client'
 import { useState, useRef, useEffect } from 'react'
 import dayjs from 'dayjs'
 import useControllableState from '../hooks/useControllableState'

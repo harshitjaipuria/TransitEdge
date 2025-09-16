@@ -1,3 +1,4 @@
+'use client'
 import { useCallback, useState } from 'react'
 import classNames from 'classnames'
 import useTimeout from '../hooks/useTimeout'

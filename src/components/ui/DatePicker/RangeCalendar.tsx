@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react'
 import dayjs from 'dayjs'
 import { isSameDate } from './utils/isSameDate'

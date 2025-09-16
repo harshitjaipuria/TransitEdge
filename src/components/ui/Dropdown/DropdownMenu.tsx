@@ -1,3 +1,6 @@
+"use client"
+
+'use client'
 import {
     useState,
     useRef,

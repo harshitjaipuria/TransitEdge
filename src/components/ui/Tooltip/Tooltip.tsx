@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import classNames from 'classnames'
 import { motion, AnimatePresence } from 'framer-motion'

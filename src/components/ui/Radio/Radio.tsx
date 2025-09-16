@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useMemo, useContext, useCallback, useEffect } from 'react'
 import classNames from '@/utils/classNames'
 import RadioGroupContext from './context'
@@ -13,10 +15,8 @@ export interface RadioProps
     disabled?: boolean
     labelRef?: Ref<HTMLLabelElement>
     name?: string
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onChange?: (value: any, e: MouseEvent) => void
     ref?: Ref<HTMLInputElement>
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     value?: any
     vertical?: boolean
     readOnly?: boolean

@@ -1,3 +1,5 @@
+"use client"
+
 import { useContext } from 'react'
 import isNil from 'lodash/isNil'
 import useUncertainRef from '../hooks/useUncertainRef'

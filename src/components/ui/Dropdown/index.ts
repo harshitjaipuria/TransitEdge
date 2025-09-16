@@ -1,3 +1,5 @@
+"use client"
+
 import type { ForwardRefExoticComponent, RefAttributes } from 'react'
 import _Dropdown, { DropdownProps } from './Dropdown'
 import DropdownItem from './DropdownItem'

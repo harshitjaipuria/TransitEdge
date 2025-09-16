@@ -1,3 +1,4 @@
+'use client'
 import SimpleBarReact from 'simplebar-react'
 import type { Props } from 'simplebar-react'
 import type SimpleBarCore from 'simplebar-core'

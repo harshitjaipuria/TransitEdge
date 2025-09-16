@@ -1,3 +1,5 @@
+"use client"
+
 import DropdownMenu from './DropdownMenu'
 import { FloatingTree, useFloatingParentNodeId } from '@floating-ui/react'
 import type { DropdownMenuProps, DropdownMenuRef } from './DropdownMenu'

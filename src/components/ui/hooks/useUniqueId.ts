@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef } from 'react'
 import uniqueId from 'lodash/uniqueId'
 import createUID from '../utils/createUid'

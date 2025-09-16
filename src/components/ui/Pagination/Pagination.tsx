@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect, useMemo } from 'react'
 import Pager from './Pagers'
 import Prev from './Prev'

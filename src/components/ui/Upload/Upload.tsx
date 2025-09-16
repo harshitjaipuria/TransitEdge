@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef, useState, useCallback, useEffect } from 'react'
 import classNames from '../utils/classNames'
 import cloneDeep from 'lodash/cloneDeep'

@@ -1,3 +1,5 @@
+'use client'
+
 import Modal from 'react-modal'
 import classNames from 'classnames'
 import CloseButton from '../CloseButton'

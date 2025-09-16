@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect, useRef } from 'react'
 import classNames from 'classnames'
 import { useConfig } from '../ConfigProvider'

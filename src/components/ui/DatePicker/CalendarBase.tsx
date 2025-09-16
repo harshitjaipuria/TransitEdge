@@ -1,3 +1,4 @@
+'use client'
 import { useRef, useState } from 'react'
 import classNames from 'classnames'
 import useControllableState from '../hooks/useControllableState'
