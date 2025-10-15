@@ -1,7 +1,6 @@
 'use client'
 
 import { useMemo } from 'react'
-import Tag from '@/components/ui/Tag'
 import Tooltip from '@/components/ui/Tooltip'
 import DataTable from '@/components/shared/DataTable'
 import { useDriverListStore } from '../_store/driverListStore'
