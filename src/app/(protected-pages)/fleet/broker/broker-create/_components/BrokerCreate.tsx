@@ -1,12 +1,11 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation'
 import { components } from 'react-select'
-import isEmpty from 'lodash/isEmpty'
 
 // UI Components
 import Container from '@/components/shared/Container'
@@ -16,7 +15,6 @@ import Input from '@/components/ui/Input'
 import Select, { Option as DefaultOption } from '@/components/ui/Select'
 import Avatar from '@/components/ui/Avatar'
 import NumericInput from '@/components/shared/NumericInput'
-import DatePicker from '@/components/ui/DatePicker'
 import { Form, FormItem } from '@/components/ui/Form'
 import BottomStickyBar from '@/components/template/BottomStickyBar'
 import Notification from '@/components/ui/Notification'
@@ -48,13 +46,8 @@ type AddressFields = {
     city: string
 }
 
-
-// Tags removed
-
-type LicenseFields = {
-    licenseNumber: string
-    issueBy: string
-    licenseDate: string
+type PanFields = {
+    panNumber: string
 }
 
 type AccountField = {
@@ -62,14 +55,14 @@ type AccountField = {
     accountVerified?: boolean
 }
 
-type DriverFormSchema = OverviewFields &
+type BrokerFormSchema = OverviewFields &
     AddressFields &
-    LicenseFields &
+    PanFields &
     AccountField
 
 // Validation Schema
 const validationSchema = z.object({
-    firstName: z.string().min(1, { message: 'Driver name required' }),
+    firstName: z.string().min(1, { message: 'Broker name required' }),
     lastName: z.string().min(1, { message: 'Father name required' }),
     email: z
         .string()
@@ -88,9 +81,12 @@ const validationSchema = z.object({
     postcode: z.string().min(1, { message: 'Postcode required' }),
     city: z.string().min(1, { message: 'City required' }),
     // tags removed
-    licenseNumber: z.string().min(1, { message: 'License number required' }).max(15, { message: 'License number must be maximum 15 characters' }),
-    issueBy: z.string().min(1, { message: 'Issue by required' }),
-    licenseDate: z.string().min(1, { message: 'License date required' }),
+    panNumber: z
+        .string()
+        .length(10, { message: 'PAN number must be exactly 10 characters' })
+        .refine((val) => /^[A-Z0-9]{10}$/.test(val), {
+            message: 'PAN number must contain only uppercase letters and numbers',
+        }),
 })
 
 type CountryOption = {
@@ -98,8 +94,6 @@ type CountryOption = {
     dialCode: string
     value: string
 }
-
-const { Control } = components
 
 const CustomSelectOption = (props: OptionProps<CountryOption>) => {
     return (
@@ -122,7 +116,7 @@ const CustomSelectOption = (props: OptionProps<CountryOption>) => {
 const CustomControl = ({ children, ...props }: ControlProps<CountryOption>) => {
     const selected = props.getValue()[0]
     return (
-        <Control {...props}>
+        <components.Control {...props}>
             {selected && (
                 <Avatar
                     className="ltr:ml-4 rtl:mr-4"
@@ -132,7 +126,7 @@ const CustomControl = ({ children, ...props }: ControlProps<CountryOption>) => {
                 />
             )}
             {children}
-        </Control>
+        </components.Control>
     )
 }
 
@@ -157,7 +151,7 @@ const CustomSelectOptionCountry = (props: OptionProps<CountryOption>) => {
 const CustomControlCountry = ({ children, ...props }: ControlProps<CountryOption>) => {
     const selected = props.getValue()[0]
     return (
-        <Control {...props}>
+        <components.Control {...props}>
             {selected && (
                 <Avatar
                     className="ltr:ml-4 rtl:mr-4"
@@ -167,17 +161,17 @@ const CustomControlCountry = ({ children, ...props }: ControlProps<CountryOption
                 />
             )}
             {children}
-        </Control>
+        </components.Control>
     )
 }
 
-const DriverCreate = () => {
+const BrokerCreate = () => {
     const router = useRouter()
 
     const [discardConfirmationOpen, setDiscardConfirmationOpen] = useState(false)
     const [isSubmiting, setIsSubmiting] = useState(false)
 
-    const defaultValues: DriverFormSchema = {
+    const defaultValues: BrokerFormSchema = {
         firstName: '',
         lastName: '',
         email: '',
@@ -187,19 +181,16 @@ const DriverCreate = () => {
         address: '',
         city: '',
         postcode: '',
-        licenseNumber: '',
-        issueBy: '',
-        licenseDate: '',
+        panNumber: '',
         banAccount: false,
         accountVerified: true,
     }
 
     const {
         handleSubmit,
-        reset,
         formState: { errors },
         control,
-    } = useForm<DriverFormSchema>({
+    } = useForm<BrokerFormSchema>({
         defaultValues,
         resolver: zodResolver(validationSchema),
     })
@@ -217,13 +208,12 @@ const DriverCreate = () => {
 
     // tags removed
 
-
-    const handleFormSubmit = async (values: DriverFormSchema) => {
+    const handleFormSubmit = async (values: BrokerFormSchema) => {
         console.log('Submitted values', values)
         setIsSubmiting(true)
         
         try {
-            const response = await fetch('/api/driver/create', {
+            const response = await fetch('/api/broker/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -234,19 +224,19 @@ const DriverCreate = () => {
             const result = await response.json()
 
             if (!response.ok) {
-                throw new Error(result.message || 'Failed to create driver')
+                throw new Error(result.message || 'Failed to create broker')
             }
 
             toast.push(
-                <Notification type="success">Driver created successfully!</Notification>,
+                <Notification type="success">Broker created successfully!</Notification>,
                 { placement: 'top-center' },
             )
-            router.push('/fleet/driver')
+            router.push('/fleet/broker')
         } catch (error) {
-            console.error('Error creating driver:', error)
+            console.error('Error creating broker:', error)
             toast.push(
                 <Notification type="danger">
-                    {error instanceof Error ? error.message : 'Failed to create driver'}
+                    {error instanceof Error ? error.message : 'Failed to create broker'}
                 </Notification>,
                 { placement: 'top-center' },
             )
@@ -258,10 +248,10 @@ const DriverCreate = () => {
     const handleConfirmDiscard = () => {
         setDiscardConfirmationOpen(false)
         toast.push(
-            <Notification type="success">Driver discarded!</Notification>,
+            <Notification type="success">Broker discarded!</Notification>,
             { placement: 'top-center' },
         )
-        router.push('/fleet/driver')
+        router.push('/fleet/broker')
     }
 
     const handleDiscard = () => {
@@ -272,28 +262,24 @@ const DriverCreate = () => {
         setDiscardConfirmationOpen(false)
     }
 
-    const onSubmit = (values: DriverFormSchema) => {
+    const onSubmit = (values: BrokerFormSchema) => {
         handleFormSubmit(values)
     }
 
     return (
         <>
-            <style jsx>{`
-                .form-label:after {
-                    content: ' *';
-                    color: #ef4444;
-                }
-                .form-label-with-asterisk:after {
-                    content: ' *';
-                    color: #ef4444;
-                }
-            `}</style>
             <Form
                 className="flex w-full h-full"
                 containerClassName="flex flex-col w-full justify-between"
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <Container>
+                    <style jsx>{`
+                        .form-label:after {
+                            content: ' *';
+                            color: #ef4444;
+                        }
+                    `}</style>
                     <div className="flex flex-col md:flex-row gap-4">
                         <div className="gap-4 flex flex-col flex-auto">
                             {/* Overview Section */}
@@ -301,10 +287,10 @@ const DriverCreate = () => {
                                 <h4 className="mb-6">Overview</h4>
                                 <div className="grid md:grid-cols-2 gap-4">
                                     <FormItem
-                                        label={"Driver Name *"}
                                         invalid={Boolean(errors.firstName)}
                                         errorMessage={errors.firstName?.message}
                                     >
+                                        <label className="form-label mb-2">Broker Name</label>
                                         <Controller
                                             name="firstName"
                                             control={control}
@@ -312,17 +298,17 @@ const DriverCreate = () => {
                                                 <Input
                                                     type="text"
                                                     autoComplete="off"
-                                                    placeholder="Driver Name"
+                                                    placeholder="Enter broker name"
                                                     {...field}
                                                 />
                                             )}
                                         />
                                     </FormItem>
                                     <FormItem
-                                        label={"Father's Name *"}
                                         invalid={Boolean(errors.lastName)}
                                         errorMessage={errors.lastName?.message}
                                     >
+                                        <label className="form-label mb-2">Father's Name</label>
                                         <Controller
                                             name="lastName"
                                             control={control}
@@ -330,7 +316,7 @@ const DriverCreate = () => {
                                                 <Input
                                                     type="text"
                                                     autoComplete="off"
-                                                    placeholder="Father's Name"
+                                                    placeholder="Enter father's name"
                                                     {...field}
                                                 />
                                             )}
@@ -361,7 +347,7 @@ const DriverCreate = () => {
                                             Boolean(errors.phoneNumber) || Boolean(errors.dialCode)
                                         }
                                     >
-                                        <label className="form-label mb-2">Phone number *</label>
+                                        <label className="form-label mb-2">Phone number</label>
                                         <Controller
                                             name="dialCode"
                                             control={control}
@@ -415,10 +401,10 @@ const DriverCreate = () => {
                             <Card>
                                 <h4 className="mb-6">Address Information</h4>
                                 <FormItem
-                                    label={"Country *"}
                                     invalid={Boolean(errors.country)}
                                     errorMessage={errors.country?.message}
                                 >
+                                    <label className="form-label mb-2">Country</label>
                                     <Controller
                                         name="country"
                                         control={control}
@@ -441,10 +427,10 @@ const DriverCreate = () => {
                                     />
                                 </FormItem>
                                 <FormItem
-                                    label={"Address *"}
                                     invalid={Boolean(errors.address)}
                                     errorMessage={errors.address?.message}
                                 >
+                                    <label className="form-label mb-2">Address</label>
                                     <Controller
                                         name="address"
                                         control={control}
@@ -452,7 +438,7 @@ const DriverCreate = () => {
                                             <Input
                                                 type="text"
                                                 autoComplete="off"
-                                                placeholder="Address"
+                                                placeholder="Enter address"
                                                 {...field}
                                             />
                                         )}
@@ -460,10 +446,10 @@ const DriverCreate = () => {
                                 </FormItem>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <FormItem
-                                        label={"City *"}
                                         invalid={Boolean(errors.city)}
                                         errorMessage={errors.city?.message}
                                     >
+                                        <label className="form-label mb-2">City</label>
                                         <Controller
                                             name="city"
                                             control={control}
@@ -471,17 +457,17 @@ const DriverCreate = () => {
                                                 <Input
                                                     type="text"
                                                     autoComplete="off"
-                                                    placeholder="City"
+                                                    placeholder="Enter city"
                                                     {...field}
                                                 />
                                             )}
                                         />
                                     </FormItem>
                                     <FormItem
-                                        label={"Postal Code *"}
                                         invalid={Boolean(errors.postcode)}
                                         errorMessage={errors.postcode?.message}
                                     >
+                                        <label className="form-label mb-2">Postal Code</label>
                                         <Controller
                                             name="postcode"
                                             control={control}
@@ -489,7 +475,7 @@ const DriverCreate = () => {
                                                 <Input
                                                     type="text"
                                                     autoComplete="off"
-                                                    placeholder="Postal Code"
+                                                    placeholder="Enter postal code"
                                                     {...field}
                                                 />
                                             )}
@@ -497,65 +483,34 @@ const DriverCreate = () => {
                                     </FormItem>
                                 </div>
                             </Card>
+
                         </div>
                         <div className="md:w-[370px] gap-4 flex flex-col">
-                            {/* License Details Section */}
+                            {/* PAN Details Section */}
                             <Card>
-                                <h4 className="mb-6">License Details</h4>
+                                <h4 className="mb-6">PAN Details</h4>
                                 <FormItem
-                                    label={"License No *"}
-                                    invalid={Boolean(errors.licenseNumber)}
-                                    errorMessage={errors.licenseNumber?.message}
+                                    invalid={Boolean((errors as any).panNumber)}
+                                    errorMessage={(errors as any).panNumber?.message}
                                 >
+                                    <label className="form-label mb-2">PAN Number</label>
                                     <Controller
-                                        name="licenseNumber"
+                                        name="panNumber"
                                         control={control}
                                         render={({ field }) => (
                                             <Input
                                                 type="text"
                                                 autoComplete="off"
-                                                placeholder="Enter License Number"
-                                                maxLength={15}
+                                                placeholder="Enter PAN Number (10 characters)"
+                                                maxLength={10}
+                                                style={{ textTransform: 'uppercase' }}
                                                 {...field}
                                                 onChange={(e) => {
-                                                    const value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '')
+                                                    const value = e.target.value
+                                                        .toUpperCase()
+                                                        .replace(/[^A-Z0-9]/g, '')
                                                     field.onChange(value)
                                                 }}
-                                            />
-                                        )}
-                                    />
-                                </FormItem>
-                                <FormItem
-                                    label={"Issue By *"}
-                                    invalid={Boolean(errors.issueBy)}
-                                    errorMessage={errors.issueBy?.message}
-                                >
-                                    <Controller
-                                        name="issueBy"
-                                        control={control}
-                                        render={({ field }) => (
-                                            <Input
-                                                type="text"
-                                                autoComplete="off"
-                                                placeholder="Enter Issue By"
-                                                {...field}
-                                            />
-                                        )}
-                                    />
-                                </FormItem>
-                                <FormItem
-                                    label={"License Date *"}
-                                    invalid={Boolean(errors.licenseDate)}
-                                    errorMessage={errors.licenseDate?.message}
-                                >
-                                    <Controller
-                                        name="licenseDate"
-                                        control={control}
-                                        render={({ field }) => (
-                                            <DatePicker
-                                                placeholder="Select License Date"
-                                                value={field.value ? new Date(field.value) : undefined}
-                                                onChange={(date) => field.onChange(date ? date.toISOString().split('T')[0] : '')}
                                             />
                                         )}
                                     />
@@ -610,4 +565,4 @@ const DriverCreate = () => {
     )
 }
 
-export default DriverCreate
+export default BrokerCreate

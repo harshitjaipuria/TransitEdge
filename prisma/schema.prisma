@@ -53,3 +53,17 @@ model DriverMaster {
   LicenseDate   String? @default("None") @db.VarChar(50)
   DriverTag     String? @default("None") @db.VarChar(50)
 }
+
+model broker_master {
+  id           Int     @id @default(autoincrement())
+  user_id      Int?
+  broker_name  String? @default("None") @db.VarChar(100)
+  fathers_name String? @default("None") @db.VarChar(100)
+  email        String? @default("None") @db.VarChar(255)
+  phone_number BigInt?
+  pan_number   String? @default("None") @db.VarChar(50)
+  country      String? @default("None") @db.VarChar(15)
+  address      String? @default("None") @db.VarChar(255)
+  city         String? @default("None") @db.VarChar(50)
+  postal_code  Int?
+}

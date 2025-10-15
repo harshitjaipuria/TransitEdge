@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation'
 import { components } from 'react-select'
-import CreatableSelect from 'react-select/creatable'
 import isEmpty from 'lodash/isEmpty'
 
 // UI Components
@@ -49,9 +48,7 @@ type AddressFields = {
 }
 
 
-type TagsFields = {
-    tags: Array<{ value: string; label: string }>
-}
+// Tags removed
 
 type PanFields = {
     panNumber: string
@@ -64,7 +61,6 @@ type AccountField = {
 
 type CustomerFormSchema = OverviewFields &
     AddressFields &
-    TagsFields &
     PanFields &
     AccountField
 
@@ -88,14 +84,11 @@ const validationSchema = z.object({
     address: z.string().min(1, { message: 'Address required' }),
     postcode: z.string().min(1, { message: 'Postcode required' }),
     city: z.string().min(1, { message: 'City required' }),
-    tags: z.array(z.object({ value: z.string(), label: z.string() })),
+    // tags removed
     panNumber: z
         .string()
-        .optional()
-        .refine((val) => !val || val.length === 10, {
-            message: 'PAN number must be exactly 10 characters',
-        })
-        .refine((val) => !val || /^[A-Z0-9]{10}$/.test(val), {
+        .length(10, { message: 'PAN number must be exactly 10 characters' })
+        .refine((val) => /^[A-Z0-9]{10}$/.test(val), {
             message: 'PAN number must contain only uppercase letters and numbers',
         }),
 })
@@ -194,7 +187,6 @@ const CustomerCreate = () => {
         address: '',
         city: '',
         postcode: '',
-        tags: [],
         panNumber: '',
         banAccount: false,
         accountVerified: true,
@@ -221,11 +213,7 @@ const CustomerCreate = () => {
         })
     }, [])
 
-    const defaultTagOptions = [
-        { value: 'frequentShoppers', label: 'Active' },
-        { value: 'inactiveCustomers', label: 'Inactive' },
-        { value: 'newCustomers', label: 'Discarded' },
-    ]
+    // tags removed
 
 
     const handleFormSubmit = async (values: CustomerFormSchema) => {
@@ -288,6 +276,12 @@ const CustomerCreate = () => {
 
     return (
         <>
+            <style jsx>{`
+                .form-label:after {
+                    content: ' *';
+                    color: #ef4444; /* red */
+                }
+            `}</style>
             <Form
                 className="flex w-full h-full"
                 containerClassName="flex flex-col w-full justify-between"
@@ -499,29 +493,6 @@ const CustomerCreate = () => {
                             </Card>
                         </div>
                         <div className="md:w-[370px] gap-4 flex flex-col">
-
-                            {/* Tags Section */}
-                            <Card>
-                                <h4 className="mb-2">Customer Tags</h4>
-                                <div className="mt-6">
-                                    <Controller
-                                        name="tags"
-                                        control={control}
-                                        render={({ field }) => (
-                                            <Select
-                                                isMulti
-                                                isClearable
-                                                instanceId="tags"
-                                                placeholder="Add tags for customer..."
-                                                componentAs={CreatableSelect}
-                                                options={defaultTagOptions}
-                                                onChange={(option) => field.onChange(option)}
-                                            />
-                                        )}
-                                    />
-                                </div>
-                            </Card>
-
                             {/* PAN Details Section */}
                             <Card>
                                 <h4 className="mb-6">PAN Details</h4>

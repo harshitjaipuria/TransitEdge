@@ -113,31 +113,13 @@ const CustomerListTable = ({
                 header: 'Location',
                 accessorKey: 'personalInfo.location',
             },
+            // Tags column removed per requirement; PAN retained
             {
                 header: 'PAN Number',
                 accessorKey: 'panNumber',
                 cell: (props) => {
                     const panNumber = props.row.original.panNumber
                     return <span>{panNumber || '-'}</span>
-                },
-            },
-            {
-                header: 'Tags',
-                accessorKey: 'tags',
-                cell: (props) => {
-                    const tags = props.row.original.tags
-                    if (!tags) return <span>-</span>
-                    
-                    const tagArray = tags.split(', ')
-                    return (
-                        <div className="flex flex-wrap gap-1">
-                            {tagArray.map((tag, index) => (
-                                <Tag key={index} className="text-xs">
-                                    {tag}
-                                </Tag>
-                            ))}
-                        </div>
-                    )
                 },
             },
             {

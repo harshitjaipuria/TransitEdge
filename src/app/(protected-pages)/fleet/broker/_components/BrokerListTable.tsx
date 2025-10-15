@@ -4,32 +4,27 @@ import { useMemo } from 'react'
 import Tag from '@/components/ui/Tag'
 import Tooltip from '@/components/ui/Tooltip'
 import DataTable from '@/components/shared/DataTable'
-import { useDriverListStore } from '../_store/driverListStore'
+import { useBrokerListStore } from '../_store/brokerListStore'
 import useAppendQueryParams from '@/utils/hooks/useAppendQueryParams'
-import { useDrivers } from '../_hooks/useDrivers'
+import { useBrokers } from '../_hooks/useBrokers'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { TbPencil } from 'react-icons/tb'
 import type { OnSortParam, ColumnDef, Row } from '@/components/shared/DataTable'
-import type { Driver } from '../types'
+import type { Broker } from '../types'
 
-type DriverListTableProps = {
-    driverListTotal: number
+type BrokerListTableProps = {
     pageIndex?: number
     pageSize?: number
 }
 
-const statusColor: Record<string, string> = {
-    active: 'bg-emerald-200 dark:bg-emerald-200 text-gray-900 dark:text-gray-900',
-    blocked: 'bg-red-200 dark:bg-red-200 text-gray-900 dark:text-gray-900',
-}
 
-const NameColumn = ({ row }: { row: Driver }) => {
+const NameColumn = ({ row }: { row: Broker }) => {
     return (
         <div className="flex items-center">
             <Link
                 className={`hover:text-primary font-semibold text-gray-900 dark:text-gray-100`}
-                href={`/concepts/drivers/driver-details/${row.id}`}
+                href={`/concepts/brokers/broker-details/${row.id}`}
             >
                 {row.name}
             </Link>
@@ -57,40 +52,39 @@ const ActionColumn = ({
     )
 }
 
-const DriverListTable = ({
-    driverListTotal,
+const BrokerListTable = ({
     pageIndex = 1,
     pageSize = 10,
-}: DriverListTableProps) => {
+}: BrokerListTableProps) => {
     const router = useRouter()
 
-    const selectedDriver = useDriverListStore(
-        (state) => state.selectedDriver,
+    const selectedBroker = useBrokerListStore(
+        (state) => state.selectedBroker,
     )
-    const setSelectedDriver = useDriverListStore(
-        (state) => state.setSelectedDriver,
+    const setSelectedBroker = useBrokerListStore(
+        (state) => state.setSelectedBroker,
     )
-    const setSelectAllDriver = useDriverListStore(
-        (state) => state.setSelectAllDriver,
+    const setSelectAllBroker = useBrokerListStore(
+        (state) => state.setSelectAllBroker,
     )
 
     const { onAppendQueryParams } = useAppendQueryParams()
 
-    // Fetch real drivers data
-    const { drivers: driverList, total, loading: isInitialLoading } = useDrivers({
+    // Fetch real brokers data
+    const { brokers: brokerList, total, loading: isInitialLoading } = useBrokers({
         page: pageIndex,
         limit: pageSize,
     })
 
-    const handleEdit = (driver: Driver) => {
-        router.push(`/fleet/driver/driver-edit/${driver.id}`)
+    const handleEdit = (broker: Broker) => {
+        router.push(`/fleet/broker/broker-edit/${broker.id}`)
     }
 
 
-    const columns: ColumnDef<Driver>[] = useMemo(
+    const columns: ColumnDef<Broker>[] = useMemo(
         () => [
             {
-                header: 'Driver Name',
+                header: 'Broker Name',
                 accessorKey: 'name',
                 cell: (props) => {
                     const row = props.row.original
@@ -105,22 +99,7 @@ const DriverListTable = ({
                 header: 'City',
                 accessorKey: 'personalInfo.city',
             },
-            {
-                header: 'License Number',
-                accessorKey: 'licenseNumber',
-                cell: (props) => {
-                    const licenseNumber = props.row.original.licenseNumber
-                    return <span>{licenseNumber || '-'}</span>
-                },
-            },
-            {
-                header: 'Expiry Date',
-                accessorKey: 'licenseExpiry',
-                cell: (props) => {
-                    const expiryDate = props.row.original.licenseExpiry
-                    return <span>{expiryDate || '-'}</span>
-                },
-            },
+            // License columns removed per requirement
             // Tags column removed per requirement
             {
                 header: '',
@@ -156,16 +135,16 @@ const DriverListTable = ({
         })
     }
 
-    const handleRowSelect = (checked: boolean, row: Driver) => {
-        setSelectedDriver(checked, row)
+    const handleRowSelect = (checked: boolean, row: Broker) => {
+        setSelectedBroker(checked, row)
     }
 
-    const handleAllRowSelect = (checked: boolean, rows: Row<Driver>[]) => {
+    const handleAllRowSelect = (checked: boolean, rows: Row<Broker>[]) => {
         if (checked) {
             const originalRows = rows.map((row) => row.original)
-            setSelectAllDriver(originalRows)
+            setSelectAllBroker(originalRows)
         } else {
-            setSelectAllDriver([])
+            setSelectAllBroker([])
         }
     }
 
@@ -173,8 +152,8 @@ const DriverListTable = ({
         <DataTable
             selectable
             columns={columns}
-            data={driverList}
-            noData={driverList.length === 0}
+            data={brokerList}
+            noData={brokerList.length === 0}
             loading={isInitialLoading}
             pagingData={{
                 total: total,
@@ -182,7 +161,7 @@ const DriverListTable = ({
                 pageSize,
             }}
             checkboxChecked={(row) =>
-                selectedDriver.some((selected) => selected.id === row.id)
+                selectedBroker.some((selected) => selected.id === row.id)
             }
             onPaginationChange={handlePaginationChange}
             onSelectChange={handleSelectChange}
@@ -193,4 +172,4 @@ const DriverListTable = ({
     )
 }
 
-export default DriverListTable
+export default BrokerListTable
