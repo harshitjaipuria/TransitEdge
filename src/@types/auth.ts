@@ -51,6 +51,7 @@ export type User = {
     userName?: string | null
     email?: string | null
     authority?: string[]
+    role?: number
 }
 
 export type Token = {

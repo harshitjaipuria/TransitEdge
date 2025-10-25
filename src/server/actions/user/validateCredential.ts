@@ -26,11 +26,14 @@ const validateCredential = async (values: SignInCredential) => {
         return null
     }
 
+    console.log('validateCredential - user role from DB:', existingUser.role)
+    
     return {
         id: String(existingUser.ID),
         userName: existingUser.name,
         email: existingUser.email_id,
         avatar: null,
+        role: existingUser.role,
     }
 }
 

@@ -9,6 +9,50 @@ import { ADMIN, USER } from '@/constants/roles.constant'
 
 const navigationConfig: NavigationTree[] = [
     {
+        key: 'administration',
+        path: '',
+        title: 'Administration',
+        translateKey: 'Administration',
+        icon: 'building',
+        type: NAV_ITEM_TYPE_TITLE,
+        authority: [ADMIN],
+        meta: {
+            horizontalMenu: {
+                layout: 'tabs',
+                columns: 2,
+            },
+        },
+        subMenu: [
+            {
+                key: 'administration.station',
+                path: '/administration/station',
+                title: 'Station Management',
+                translateKey: 'nav.administration.station',
+                icon: 'building',
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [ADMIN],
+                meta: {
+                    description: {
+                        translateKey: 'nav.administration.station.desc',
+                        label: 'Manage stations and locations',
+                    },
+                },
+                subMenu: [
+                    {
+                        key: 'administration.station.list',
+                        path: '/administration/station',
+                        title: 'Create Station',
+                        translateKey: 'nav.administration.station.list',
+                        icon: 'list',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN],
+                        subMenu: [],
+                    },
+                ],
+            },
+        ],
+    },
+    {
         key: 'fleet',
         path: '',
         title: 'Fleet',
@@ -81,7 +125,8 @@ const navigationConfig: NavigationTree[] = [
                 ],
             },
         ],
-    },
+    }
+    
 ]
 
 export default navigationConfig

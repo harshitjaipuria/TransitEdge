@@ -31,19 +31,34 @@ export default {
                     name: user.userName,
                     email: user.email,
                     image: user.avatar,
+                    role: user.role,
                 }
             },
         }),
     ],
     callbacks: {
+        async jwt({ token, user }) {
+            if (user && 'role' in user) {
+                token.role = (user as any).role
+                console.log('JWT callback - user role:', (user as any).role, 'token role:', token.role)
+            }
+            return token
+        },
         async session(payload) {
             /** apply extra user attributes here, for example, we add 'authority' & 'id' in this section */
+            const userRole = payload.token.role as number
+            const authority = userRole === 1 ? ['admin'] : ['user']
+            
+            // Debug logging
+            console.log('Session callback - userRole:', userRole, 'authority:', authority)
+            
             return {
                 ...payload.session,
                 user: {
                     ...payload.session.user,
                     id: payload.token.sub,
-                    authority: ['admin', 'user'],
+                    authority: authority,
+                    role: userRole,
                 },
             }
         },

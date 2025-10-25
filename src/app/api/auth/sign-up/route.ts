@@ -58,6 +58,7 @@ export async function POST(request: Request) {
                 password: passwordHash,
                 branch: branch || null,
                 office_type: 'default',
+                role: 0, // Default role is 0 (user)
             },
         })
 

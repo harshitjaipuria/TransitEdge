@@ -97,7 +97,7 @@ const SideNav = ({
                         routeKey={currentRouteKey}
                         direction={direction}
                         translationSetup={translationSetup}
-                        userAuthority={session?.user?.authroity || []}
+                        userAuthority={(session?.user as any)?.authority || []}
                     />
                 </ScrollBar>
             </div>

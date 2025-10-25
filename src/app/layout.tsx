@@ -19,6 +19,20 @@ export default async function RootLayout({
 }>) {
     const session = await auth()
 
+    // Add authority to session if user exists
+    if (session?.user) {
+        const userRole = (session.user as any).role as number
+        const authority = userRole === 1 ? ['admin'] : ['user']
+        
+        console.log('Layout - userRole:', userRole, 'authority:', authority)
+        
+        session.user = {
+            ...session.user,
+            authority: authority,
+            role: userRole,
+        }
+    }
+
     const navigationTree = await getNavigation()
 
     const theme = await getTheme()

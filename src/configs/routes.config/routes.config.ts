@@ -44,6 +44,15 @@ export const protectedRoutes: Routes = {
     },
 }
 
-export const publicRoutes: Routes = {}
+export const publicRoutes: Routes = {
+    '/api/test-role-logic': {
+        key: 'test-role-logic',
+        authority: [],
+        meta: {
+            pageBackgroundType: 'plain',
+            pageContainerType: 'contained',
+        },
+    },
+}
 
 export const authRoutes = authRoute

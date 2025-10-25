@@ -22,11 +22,17 @@ const HorizontalNav = ({
 
     const { navigationTree } = useNavigation()
 
+    // Debug logging
+    console.log('HorizontalNav - session:', session)
+    console.log('HorizontalNav - session.user:', session?.user)
+    console.log('HorizontalNav - session.user.authority:', session?.user?.authority)
+    console.log('HorizontalNav - (session.user as any).authority:', (session?.user as any)?.authority)
+
     return (
         <HorizontalMenuContent
             navigationTree={navigationTree}
             routeKey={currentRouteKey}
-            userAuthority={session?.user?.authority || []}
+            userAuthority={(session?.user as any)?.authority || []}
             translationSetup={translationSetup}
         />
     )
