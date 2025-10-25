@@ -227,20 +227,6 @@ const StationCreate = () => {
         
         try {
             // TODO: Implement station creation API call
-            // const response = await fetch('/api/station/create', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(values),
-            // })
-
-            // const result = await response.json()
-
-            // if (!response.ok) {
-            //     throw new Error(result.message || 'Failed to create station')
-            // }
-
             toast.push(
                 <Notification type="success">Station created successfully!</Notification>,
                 { placement: 'top-center' },
