@@ -49,7 +49,8 @@ export async function POST(request: Request) {
 
         // Convert tags array to string for database storage (same as owner API)
         const tagsString = tags && tags.length > 0 
-            ? tags.map((tag: any) => tag.label || tag.value || tag).join(', ') 
+            ? tags.map((tag: { label?: string; value?: string } | string) => 
+                typeof tag === 'string' ? tag : (tag.label || tag.value || '')).join(', ') 
             : null
 
         // Create driver in database

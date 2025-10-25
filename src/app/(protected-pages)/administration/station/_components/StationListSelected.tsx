@@ -1,14 +1,12 @@
 'use client'
 
 import { useStationListStore } from '../_store/stationListStore'
-import { useRouter } from 'next/navigation'
 import Button from '@/components/ui/Button'
 import { TbTrash, TbEdit } from 'react-icons/tb'
 import Notification from '@/components/ui/Notification'
 import toast from '@/components/ui/toast'
 
 const StationListSelected = () => {
-    const router = useRouter()
     const selectedStation = useStationListStore((state) => state.selectedStation)
     const clearSelectedStation = useStationListStore((state) => state.clearSelectedStation)
 

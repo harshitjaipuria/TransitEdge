@@ -71,7 +71,7 @@ export async function PATCH(
         }
 
         // Build update payload from provided fields
-        const data: any = {}
+        const data: Record<string, string | null> = {}
         if (typeof firstName !== 'undefined') data.broker_name = firstName
         if (typeof lastName !== 'undefined') data.fathers_name = lastName
         if (typeof email !== 'undefined') data.email = email || null

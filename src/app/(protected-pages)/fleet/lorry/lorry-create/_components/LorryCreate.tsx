@@ -1,20 +1,16 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation'
-import { components } from 'react-select'
 
 // UI Components
 import Container from '@/components/shared/Container'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import Input from '@/components/ui/Input'
-import Select, { Option as DefaultOption } from '@/components/ui/Select'
-import Avatar from '@/components/ui/Avatar'
-import NumericInput from '@/components/shared/NumericInput'
 import DatePicker from '@/components/ui/DatePicker'
 import { Form, FormItem } from '@/components/ui/Form'
 import Radio from '@/components/ui/Radio'
@@ -27,10 +23,8 @@ import ConfirmDialog from '@/components/shared/ConfirmDialog'
 import { TbTrash } from 'react-icons/tb'
 
 // Utils
-import { countryList } from '@/constants/countries.constant'
 
 // Types
-import type { ControlProps, OptionProps } from 'react-select'
 
 // Form Schema Types
 type OverviewFields = {
@@ -43,7 +37,7 @@ type VehicleFields = {
     model?: string
 }
 
-type AddressFields = {}
+type AddressFields = Record<string, never>
 
 type ExtraFields = {
     bodyType?: string
@@ -131,44 +125,7 @@ const validationSchema = z.object({
         }, { message: 'Invalid date format' }),
 })
 
-type CountryOption = {
-    label: string
-    dialCode: string
-    value: string
-}
 
-const { Control } = components
-
-const CustomSelectOptionCountry = (props: OptionProps<CountryOption>) => {
-    return (
-        <DefaultOption<CountryOption>
-            {...props}
-            customLabel={(data, label) => (
-                <span className="flex items-center gap-2">
-                    <Avatar shape="circle" size={20} src={`/img/countries/${data.value}.png`} />
-                    <span>{label}</span>
-                </span>
-            )}
-        />
-    )
-}
-
-const CustomControlCountry = ({ children, ...props }: ControlProps<CountryOption>) => {
-    const selected = props.getValue()[0]
-    return (
-        <Control {...props}>
-            {selected && (
-                <Avatar
-                    className="ltr:ml-4 rtl:mr-4"
-                    shape="circle"
-                    size={20}
-                    src={`/img/countries/${selected.value}.png`}
-                />
-            )}
-            {children}
-        </Control>
-    )
-}
 
 const LorryCreate = () => {
     const router = useRouter()
@@ -200,7 +157,6 @@ const LorryCreate = () => {
 
     const {
         handleSubmit,
-        reset,
         formState: { errors },
         control,
     } = useForm<LorryFormSchema>({
@@ -208,7 +164,6 @@ const LorryCreate = () => {
         resolver: zodResolver(validationSchema),
     })
 
-    const countryOptions = useMemo(() => countryList, [])
 
     const handleFormSubmit = async (values: LorryFormSchema) => {
         setIsSubmiting(true)

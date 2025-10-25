@@ -39,8 +39,8 @@ export default {
     callbacks: {
         async jwt({ token, user }) {
             if (user && 'role' in user) {
-                token.role = (user as any).role
-                console.log('JWT callback - user role:', (user as any).role, 'token role:', token.role)
+                token.role = (user as { role: number }).role
+                console.log('JWT callback - user role:', (user as { role: number }).role, 'token role:', token.role)
             }
             return token
         },

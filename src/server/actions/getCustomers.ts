@@ -17,7 +17,7 @@ const getCustomers = async (_queryParams: {
 
     // TODO: Replace with actual database query
     // For now, returning empty data to remove mock data
-    const customers: any[] = []
+    const customers: unknown[] = []
 
     let data = structuredClone(customers)
     let total = customers.length

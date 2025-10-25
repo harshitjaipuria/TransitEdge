@@ -308,7 +308,7 @@ const BrokerCreate = () => {
                                         invalid={Boolean(errors.lastName)}
                                         errorMessage={errors.lastName?.message}
                                     >
-                                        <label className="form-label mb-2">Father's Name</label>
+                                        <label className="form-label mb-2">Father&apos;s Name</label>
                                         <Controller
                                             name="lastName"
                                             control={control}
@@ -490,8 +490,8 @@ const BrokerCreate = () => {
                             <Card>
                                 <h4 className="mb-6">PAN Details</h4>
                                 <FormItem
-                                    invalid={Boolean((errors as any).panNumber)}
-                                    errorMessage={(errors as any).panNumber?.message}
+                                    invalid={Boolean(errors.panNumber)}
+                                    errorMessage={errors.panNumber?.message}
                                 >
                                     <label className="form-label mb-2">PAN Number</label>
                                     <Controller

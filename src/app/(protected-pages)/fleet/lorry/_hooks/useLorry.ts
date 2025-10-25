@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { Lorry } from '../types'
 
 interface UseLorryReturn {
@@ -15,7 +15,7 @@ export const useLorry = (id: string): UseLorryReturn => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
-    const fetchLorry = async () => {
+    const fetchLorry = useCallback(async () => {
         if (!id) {
             setError('Lorry ID is required')
             setLoading(false)
@@ -41,11 +41,11 @@ export const useLorry = (id: string): UseLorryReturn => {
         } finally {
             setLoading(false)
         }
-    }
+    }, [id])
 
     useEffect(() => {
         fetchLorry()
-    }, [id])
+    }, [id, fetchLorry])
 
     return {
         lorry,

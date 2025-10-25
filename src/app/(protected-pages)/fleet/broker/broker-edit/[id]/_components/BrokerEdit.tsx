@@ -211,7 +211,7 @@ const BrokerEdit = ({ brokerId }: BrokerEditProps) => {
                 // Set tags
                 if (broker.tags) {
                     const tagArray = broker.tags.split(', ')
-                    const formattedTags = tagArray.map(tag => ({
+                    const formattedTags = tagArray.map((tag: string) => ({
                         value: tag.toLowerCase().replace(/\s+/g, ''),
                         label: tag
                     }))

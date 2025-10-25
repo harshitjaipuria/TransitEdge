@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import type { Customer, GetCustomersListResponse } from '../types'
+import { useState, useEffect, useCallback } from 'react'
+import type { Customer } from '../types'
 
 interface UseOwnersParams {
     page?: number
@@ -31,7 +31,7 @@ export const useOwners = (params: UseOwnersParams = {}): UseOwnersReturn => {
         sortOrder = 'desc',
     } = params
 
-    const fetchOwners = async () => {
+    const fetchOwners = useCallback(async () => {
         try {
             setLoading(true)
             setError(null)
@@ -64,11 +64,11 @@ export const useOwners = (params: UseOwnersParams = {}): UseOwnersReturn => {
         } finally {
             setLoading(false)
         }
-    }
+    }, [page, limit, search, sortBy, sortOrder])
 
     useEffect(() => {
         fetchOwners()
-    }, [page, limit, search, sortBy, sortOrder])
+    }, [page, limit, search, sortBy, sortOrder, fetchOwners])
 
     return {
         owners,

@@ -15,9 +15,9 @@ export interface RadioProps
     disabled?: boolean
     labelRef?: Ref<HTMLLabelElement>
     name?: string
-    onChange?: (value: any, e: MouseEvent) => void
+    onChange?: (value: unknown, e: MouseEvent) => void
     ref?: Ref<HTMLInputElement>
-    value?: any
+    value?: unknown
     vertical?: boolean
     readOnly?: boolean
 }

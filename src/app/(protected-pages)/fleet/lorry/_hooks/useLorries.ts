@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { Lorry } from '../types'
 
 interface UseLorriesParams {
@@ -33,7 +33,7 @@ export const useLorries = (params: UseLorriesParams = {}): UseLorriesReturn => {
         sortOrder = 'desc',
     } = params
 
-    const fetchLorries = async () => {
+    const fetchLorries = useCallback(async () => {
         try {
             setLoading(true)
             setError(null)
@@ -66,11 +66,11 @@ export const useLorries = (params: UseLorriesParams = {}): UseLorriesReturn => {
         } finally {
             setLoading(false)
         }
-    }
+    }, [page, limit, search, sortBy, sortOrder])
 
     useEffect(() => {
         fetchLorries()
-    }, [page, limit, search, sortBy, sortOrder])
+    }, [page, limit, search, sortBy, sortOrder, fetchLorries])
 
     return {
         lorries,

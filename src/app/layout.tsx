@@ -21,7 +21,7 @@ export default async function RootLayout({
 
     // Add authority to session if user exists
     if (session?.user) {
-        const userRole = (session.user as any).role as number
+            const userRole = (session.user as { role: number }).role
         const authority = userRole === 1 ? ['admin'] : ['user']
         
         console.log('Layout - userRole:', userRole, 'authority:', authority)

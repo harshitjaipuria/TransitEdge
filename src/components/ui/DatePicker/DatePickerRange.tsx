@@ -38,12 +38,12 @@ export interface DatePickerRangeProps
     value?: DatePickerRangeValue
 }
 
-const validationRule = (val: any) =>
+const validationRule = (val: unknown) =>
     Array.isArray(val) &&
     val.length === 2 &&
     val.every((v) => v instanceof Date)
 
-const isFirstDateSet = (val: any) =>
+const isFirstDateSet = (val: unknown) =>
     Array.isArray(val) && val.length === 2 && val[0] instanceof Date
 
 const DatePickerRange = (props: DatePickerRangeProps) => {

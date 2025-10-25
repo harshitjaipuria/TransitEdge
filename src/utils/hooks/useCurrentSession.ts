@@ -5,11 +5,11 @@ const useCurrentSession = () => {
     const context = useContext(SessionContext)
 
     // Debug logging
-    console.log('useCurrentSession - context:', context?.user ? {
-        id: context.user.id,
-        authority: (context.user as any).authority,
-        role: (context.user as any).role
-    } : 'No context')
+        console.log('useCurrentSession - context:', context?.user ? {
+            id: context.user.id,
+            authority: (context.user as { authority: string[] }).authority,
+            role: (context.user as { role: number }).role
+        } : 'No context')
 
     return {
         session: context || {

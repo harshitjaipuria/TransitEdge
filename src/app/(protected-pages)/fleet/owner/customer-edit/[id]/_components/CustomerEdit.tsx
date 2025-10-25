@@ -1,13 +1,12 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useRouter, useParams } from 'next/navigation'
 import { components } from 'react-select'
 import CreatableSelect from 'react-select/creatable'
-import isEmpty from 'lodash/isEmpty'
 
 // UI Components
 import Container from '@/components/shared/Container'
@@ -115,7 +114,6 @@ const CustomSelectOption = (props: OptionProps<CountryOption>) => {
 }
 
 const CustomControl = ({ children, ...props }: ControlProps<CountryOption>) => {
-    const selected = props.getValue()[0]
     return (
         <Control {...props}>
             {children}
@@ -137,7 +135,6 @@ const CustomSelectOptionCountry = (props: OptionProps<CountryOption>) => {
 }
 
 const CustomControlCountry = ({ children, ...props }: ControlProps<CountryOption>) => {
-    const selected = props.getValue()[0]
     return (
         <Control {...props}>
             {children}
@@ -173,7 +170,6 @@ const CustomerEdit = ({ data }: CustomerEditProps) => {
 
     const {
         handleSubmit,
-        reset,
         formState: { errors },
         control,
     } = useForm<CustomerFormSchema>({

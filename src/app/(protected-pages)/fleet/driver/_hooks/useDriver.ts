@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { Driver } from '../types'
 
 interface UseDriverReturn {
@@ -15,7 +15,7 @@ export const useDriver = (id: string): UseDriverReturn => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
-    const fetchDriver = async () => {
+    const fetchDriver = useCallback(async () => {
         if (!id) {
             setError('Driver ID is required')
             setLoading(false)
@@ -41,11 +41,11 @@ export const useDriver = (id: string): UseDriverReturn => {
         } finally {
             setLoading(false)
         }
-    }
+    }, [id])
 
     useEffect(() => {
         fetchDriver()
-    }, [id])
+    }, [id, fetchDriver])
 
     return {
         driver,

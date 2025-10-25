@@ -7,7 +7,6 @@ import { useStationListStore } from '../_store/stationListStore'
 import useAppendQueryParams from '@/utils/hooks/useAppendQueryParams'
 import { useStations } from '../_hooks/useStations'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 import { TbPencil } from 'react-icons/tb'
 import type { OnSortParam, ColumnDef, Row } from '@/components/shared/DataTable'
 import type { Station } from '../types'
@@ -18,23 +17,7 @@ type StationListTableProps = {
     pageSize?: number
 }
 
-const statusColor: Record<string, string> = {
-    active: 'bg-emerald-200 dark:bg-emerald-200 text-gray-900 dark:text-gray-900',
-    blocked: 'bg-red-200 dark:bg-red-200 text-gray-900 dark:text-gray-900',
-}
 
-const NameColumn = ({ row }: { row: Station }) => {
-    return (
-        <div className="flex items-center">
-            <Link
-                className={`hover:text-primary font-semibold text-gray-900 dark:text-gray-100`}
-                href={`/administration/station/station-edit/${row.id}`}
-            >
-                {row.station_name}
-            </Link>
-        </div>
-    )
-}
 
 const ActionColumn = ({
     onEdit,
@@ -57,7 +40,6 @@ const ActionColumn = ({
 }
 
 const StationListTable = ({
-    stationListTotal,
     pageIndex = 1,
     pageSize = 10,
 }: StationListTableProps) => {

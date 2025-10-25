@@ -1,12 +1,11 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation'
 import { components } from 'react-select'
-import isEmpty from 'lodash/isEmpty'
 
 // UI Components
 import Container from '@/components/shared/Container'
@@ -202,7 +201,6 @@ const StationCreate = () => {
 
     const {
         handleSubmit,
-        reset,
         formState: { errors },
         control,
     } = useForm<StationFormSchema>({

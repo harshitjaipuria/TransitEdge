@@ -2,7 +2,7 @@
 
 import LorryCreate from './_components/LorryCreate'
 
-const Page = async () => {
+const Page = () => {
     return <LorryCreate />
 }
 

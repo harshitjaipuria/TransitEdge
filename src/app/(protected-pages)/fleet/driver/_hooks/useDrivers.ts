@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { Driver } from '../types'
 
 interface UseDriversParams {
@@ -33,7 +33,7 @@ export const useDrivers = (params: UseDriversParams = {}): UseDriversReturn => {
         sortOrder = 'desc',
     } = params
 
-    const fetchDrivers = async () => {
+    const fetchDrivers = useCallback(async () => {
         try {
             setLoading(true)
             setError(null)
@@ -66,11 +66,11 @@ export const useDrivers = (params: UseDriversParams = {}): UseDriversReturn => {
         } finally {
             setLoading(false)
         }
-    }
+    }, [page, limit, search, sortBy, sortOrder])
 
     useEffect(() => {
         fetchDrivers()
-    }, [page, limit, search, sortBy, sortOrder])
+    }, [page, limit, search, sortBy, sortOrder, fetchDrivers])
 
     return {
         drivers,

@@ -15,11 +15,11 @@ const AuthProvider = (props: AuthProviderProps) => {
     const { session, children } = props
 
     // Debug logging
-    console.log('AuthProvider - session:', session?.user ? {
-        id: session.user.id,
-        authority: (session.user as any).authority,
-        role: (session.user as any).role
-    } : 'No session')
+        console.log('AuthProvider - session:', session?.user ? {
+            id: session.user.id,
+            authority: (session.user as { authority: string[] }).authority,
+            role: (session.user as { role: number }).role
+        } : 'No session')
 
     return (
         /** since the next auth useSession hook was triggering mutliple re-renders, hence we are using the our custom session provider and we still included the next auth session provider, incase we need to use any client hooks from next auth */

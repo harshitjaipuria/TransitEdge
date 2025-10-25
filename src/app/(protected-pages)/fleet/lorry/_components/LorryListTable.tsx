@@ -5,7 +5,6 @@ import DataTable from '@/components/shared/DataTable'
 import useAppendQueryParams from '@/utils/hooks/useAppendQueryParams'
 import { useLorries } from '../_hooks/useLorries'
 import { useLorryListStore } from '../_store/lorryListStore'
-import { useRouter } from 'next/navigation'
 import type { OnSortParam, ColumnDef, Row } from '@/components/shared/DataTable'
 import type { Lorry } from '../types'
 
@@ -18,7 +17,6 @@ const LorryListTable = ({
     pageIndex = 1,
     pageSize = 10,
 }: LorryListTableProps) => {
-    const router = useRouter()
 
     const selectedLorry = useLorryListStore((state) => state.selectedLorry)
     const setSelectedLorry = useLorryListStore((state) => state.setSelectedLorry)
@@ -31,9 +29,6 @@ const LorryListTable = ({
         limit: pageSize,
     })
 
-    const handleEdit = (lorry: Lorry) => {
-        router.push(`/fleet/lorry/lorry-edit/${lorry.id}`)
-    }
 
     const columns: ColumnDef<Lorry>[] = useMemo(
         () => [

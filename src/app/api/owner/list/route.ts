@@ -28,7 +28,7 @@ export async function GET(request: Request) {
         const offset = (page - 1) * limit
 
         // Build where clause for search
-        const whereClause: any = {
+        const whereClause: Record<string, unknown> = {
             user_id: session.user.id,
         }
 

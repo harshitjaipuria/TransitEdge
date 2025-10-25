@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { Customer } from '../types'
 
 interface UseOwnerReturn {
@@ -13,7 +13,7 @@ export const useOwner = (id: string): UseOwnerReturn => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
-    const fetchOwner = async () => {
+    const fetchOwner = useCallback(async () => {
         if (!id) {
             setError('Owner ID is required')
             setLoading(false)
@@ -39,11 +39,11 @@ export const useOwner = (id: string): UseOwnerReturn => {
         } finally {
             setLoading(false)
         }
-    }
+    }, [id])
 
     useEffect(() => {
         fetchOwner()
-    }, [id])
+    }, [id, fetchOwner])
 
     return {
         owner,

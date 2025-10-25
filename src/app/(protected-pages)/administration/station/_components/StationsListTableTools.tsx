@@ -44,10 +44,12 @@ const StationsListTableTools = () => {
                     placeholder="Page size"
                     className="w-40"
                     onChange={(option) => {
-                        onAppendQueryParams({
-                            pageSize: String(option.value),
-                            pageIndex: '1',
-                        })
+                        if (option) {
+                            onAppendQueryParams({
+                                pageSize: String(option.value),
+                                pageIndex: '1',
+                            })
+                        }
                     }}
                 />
             </div>

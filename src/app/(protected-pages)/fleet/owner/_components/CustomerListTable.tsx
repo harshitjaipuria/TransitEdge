@@ -1,7 +1,6 @@
 'use client'
 
 import { useMemo } from 'react'
-import Tag from '@/components/ui/Tag'
 import Tooltip from '@/components/ui/Tooltip'
 import DataTable from '@/components/shared/DataTable'
 import { useCustomerListStore } from '../_store/customerListStore'
@@ -19,10 +18,6 @@ type CustomerListTableProps = {
     pageSize?: number
 }
 
-const statusColor: Record<string, string> = {
-    active: 'bg-emerald-200 dark:bg-emerald-200 text-gray-900 dark:text-gray-900',
-    blocked: 'bg-red-200 dark:bg-red-200 text-gray-900 dark:text-gray-900',
-}
 
 const NameColumn = ({ row }: { row: Customer }) => {
     return (
@@ -58,7 +53,6 @@ const ActionColumn = ({
 }
 
 const CustomerListTable = ({
-    customerListTotal,
     pageIndex = 1,
     pageSize = 10,
 }: CustomerListTableProps) => {

@@ -26,13 +26,13 @@ const HorizontalNav = ({
     console.log('HorizontalNav - session:', session)
     console.log('HorizontalNav - session.user:', session?.user)
     console.log('HorizontalNav - session.user.authority:', session?.user?.authority)
-    console.log('HorizontalNav - (session.user as any).authority:', (session?.user as any)?.authority)
+    console.log('HorizontalNav - (session.user as { authority: string[] }).authority:', (session?.user as { authority: string[] })?.authority)
 
     return (
         <HorizontalMenuContent
             navigationTree={navigationTree}
             routeKey={currentRouteKey}
-            userAuthority={(session?.user as any)?.authority || []}
+            userAuthority={(session?.user as { authority: string[] })?.authority || []}
             translationSetup={translationSetup}
         />
     )

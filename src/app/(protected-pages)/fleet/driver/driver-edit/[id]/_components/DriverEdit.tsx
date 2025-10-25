@@ -92,7 +92,6 @@ const DriverEdit = ({ data }: DriverEditProps) => {
         control,
         handleSubmit,
         formState: { errors },
-        reset,
     } = useForm<DriverFormSchema>({
         resolver: zodResolver(validationSchema),
         defaultValues: {

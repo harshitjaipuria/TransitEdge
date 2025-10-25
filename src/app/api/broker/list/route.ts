@@ -25,7 +25,7 @@ export async function GET(request: Request) {
         const allowedSortFields = new Set(['id', 'broker_name', 'city', 'phone_number'])
         const sortBy: 'id' | 'broker_name' | 'city' | 'phone_number' =
             (allowedSortFields.has(sortByNormalized)
-                ? (sortByNormalized as any)
+                ? (sortByNormalized as 'id' | 'broker_name' | 'city' | 'phone_number')
                 : 'id')
 
         const userId = Number(session.user.id)
