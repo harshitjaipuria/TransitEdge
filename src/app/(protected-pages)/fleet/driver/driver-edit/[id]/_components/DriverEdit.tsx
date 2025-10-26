@@ -11,7 +11,7 @@ import Container from '@/components/shared/Container'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import Input from '@/components/ui/Input'
-import Select, { Option as DefaultOption } from '@/components/ui/Select'
+import Select from '@/components/ui/Select'
 import { Form, FormItem } from '@/components/ui/Form'
 import BottomStickyBar from '@/components/template/BottomStickyBar'
 import Notification from '@/components/ui/Notification'
@@ -21,7 +21,7 @@ import toast from '@/components/ui/toast'
 import { countryList } from '@/constants/countries.constant'
 
 // Types
-import type { Driver } from '../../types'
+import type { Driver } from '../../../types'
 
 // Form Schema Types
 type OverviewFields = {
@@ -112,9 +112,10 @@ const DriverEdit = ({ data }: DriverEditProps) => {
     })
 
     const countryOptions: CountryOption[] = countryList.map((country) => ({
-        label: country.name,
+        label: country.label,
         dialCode: country.dialCode,
-        value: country.code,
+        value: country.value,
+        flag: country.flag,
     }))
 
     const experienceOptions = [
@@ -227,20 +228,15 @@ const DriverEdit = ({ data }: DriverEditProps) => {
                                                 name="dialCode"
                                                 control={control}
                                                 render={({ field }) => (
-                                                    <Select
-                                                        {...field}
+                                                    <Select<CountryOption>
                                                         className="w-24"
                                                         placeholder="Code"
-                                                    >
-                                                        {countryOptions.map((option) => (
-                                                            <DefaultOption
-                                                                key={option.value}
-                                                                value={option.value}
-                                                            >
-                                                                {option.dialCode}
-                                                            </DefaultOption>
-                                                        ))}
-                                                    </Select>
+                                                        options={countryOptions}
+                                                        value={countryOptions.find(option => option.value === field.value)}
+                                                        onChange={(option) => field.onChange(option?.value)}
+                                                        getOptionValue={(option) => option.value}
+                                                        getOptionLabel={(option) => option.dialCode}
+                                                    />
                                                 )}
                                             />
                                             <Controller
@@ -306,16 +302,14 @@ const DriverEdit = ({ data }: DriverEditProps) => {
                                             name="experience"
                                             control={control}
                                             render={({ field }) => (
-                                                <Select {...field} placeholder="Select experience">
-                                                    {experienceOptions.map((option) => (
-                                                        <DefaultOption
-                                                            key={option.value}
-                                                            value={option.value}
-                                                        >
-                                                            {option.label}
-                                                        </DefaultOption>
-                                                    ))}
-                                                </Select>
+                                                <Select<{value: string, label: string}>
+                                                    placeholder="Select experience"
+                                                    options={experienceOptions}
+                                                    value={experienceOptions.find(option => option.value === field.value)}
+                                                    onChange={(option) => field.onChange(option?.value)}
+                                                    getOptionValue={(option) => option.value}
+                                                    getOptionLabel={(option) => option.label}
+                                                />
                                             )}
                                         />
                                     </FormItem>
@@ -354,16 +348,14 @@ const DriverEdit = ({ data }: DriverEditProps) => {
                                             name="country"
                                             control={control}
                                             render={({ field }) => (
-                                                <Select {...field} placeholder="Select country">
-                                                    {countryOptions.map((option) => (
-                                                        <DefaultOption
-                                                            key={option.value}
-                                                            value={option.value}
-                                                        >
-                                                            {option.label}
-                                                        </DefaultOption>
-                                                    ))}
-                                                </Select>
+                                                <Select<CountryOption>
+                                                    placeholder="Select country"
+                                                    options={countryOptions}
+                                                    value={countryOptions.find(option => option.value === field.value)}
+                                                    onChange={(option) => field.onChange(option?.value)}
+                                                    getOptionValue={(option) => option.value}
+                                                    getOptionLabel={(option) => option.label}
+                                                />
                                             )}
                                         />
                                     </FormItem>

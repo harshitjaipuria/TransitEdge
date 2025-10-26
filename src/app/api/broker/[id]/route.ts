@@ -79,7 +79,7 @@ export async function PATCH(
         if (typeof country !== 'undefined') data.country = country || null
         if (typeof address !== 'undefined') data.address = address || null
         if (typeof city !== 'undefined') data.city = city || null
-        if (typeof postcode !== 'undefined') data.postal_code = postcode ? parseInt(postcode) : null
+        if (typeof postcode !== 'undefined') data.postal_code = postcode ? parseInt(postcode).toString() : null
 
         if (typeof phoneNumber !== 'undefined' || typeof dialCode !== 'undefined') {
             const phoneStr =

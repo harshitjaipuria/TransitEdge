@@ -37,8 +37,6 @@ type VehicleFields = {
     model?: string
 }
 
-type AddressFields = Record<string, never>
-
 type ExtraFields = {
     bodyType?: string
     color?: string
@@ -57,7 +55,7 @@ type ExtraFields = {
     complianceType?: 'TDS' | 'RC'
 }
 
-type LorryFormSchema = OverviewFields & VehicleFields & AddressFields & ExtraFields
+type LorryFormSchema = OverviewFields & VehicleFields & ExtraFields
 
 // Validation Schema
 const validationSchema = z.object({

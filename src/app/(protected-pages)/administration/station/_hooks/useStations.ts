@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { Station } from '../types'
 
 interface UseStationsParams {
@@ -31,7 +31,7 @@ export const useStations = ({
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
-    const fetchStations = async () => {
+    const fetchStations = useCallback(async () => {
         try {
             setLoading(true)
             setError(null)
@@ -57,11 +57,11 @@ export const useStations = ({
         } finally {
             setLoading(false)
         }
-    }
+    }, [page, limit, search, sortBy, sortOrder])
 
     useEffect(() => {
         fetchStations()
-    }, [page, limit, search, sortBy, sortOrder])
+    }, [fetchStations])
 
     return {
         stations,

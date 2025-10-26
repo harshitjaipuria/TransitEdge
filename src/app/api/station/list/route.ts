@@ -39,7 +39,7 @@ export async function GET(request: Request) {
         } : {}
 
         // Build order by clause
-        const orderBy: any = {}
+        const orderBy: Record<string, string> = {}
         orderBy[sortBy] = sortOrder
 
         // Get total count for pagination

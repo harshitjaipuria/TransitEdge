@@ -132,7 +132,7 @@ export async function POST(request: Request) {
             if (cleanPhoneNumber) {
                 phoneNumberBigInt = BigInt(cleanPhoneNumber)
             }
-        } catch (error) {
+        } catch {
             return NextResponse.json(
                 { message: 'Invalid phone number format' },
                 { status: 400 }

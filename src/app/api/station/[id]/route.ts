@@ -236,7 +236,7 @@ export async function PUT(
             if (cleanPhoneNumber) {
                 phoneNumberBigInt = BigInt(cleanPhoneNumber)
             }
-        } catch (error) {
+        } catch {
             return NextResponse.json(
                 { message: 'Invalid phone number format' },
                 { status: 400 }
