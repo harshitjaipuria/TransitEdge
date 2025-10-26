@@ -1,13 +1,3 @@
-import NextAuth from 'next-auth'
-import appConfig from '@/configs/app.config'
-import authConfig from '@/configs/auth.config'
+import { handlers } from '@/auth'
 
-const config = {
-    pages: {
-        signIn: appConfig.authenticatedEntryPath,
-        error: appConfig.authenticatedEntryPath,
-    },
-    ...authConfig,
-}
-
-export const { GET, POST } = NextAuth(config)
+export const { GET, POST } = handlers

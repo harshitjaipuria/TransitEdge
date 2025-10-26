@@ -111,7 +111,7 @@ const Radio = (props: RadioProps) => {
                         radioClass,
                     )}
                     disabled={disabled}
-                    value={value}
+                    value={value as string | number | readonly string[] | undefined}
                     name={name}
                     readOnly={readOnly}
                     onChange={onRadioChange}

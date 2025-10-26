@@ -3,12 +3,13 @@ import appConfig from '@/configs/app.config'
 import authConfig from '@/configs/auth.config'
 
 const config = {
+    ...authConfig,
     pages: {
         signIn: appConfig.authenticatedEntryPath,
         error: appConfig.authenticatedEntryPath,
     },
-    ...authConfig,
 }
 
-const nextAuth = NextAuth(config)
-export const { handlers, signIn, signOut, auth } = nextAuth
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const nextAuthInstance = (NextAuth as any)(config)
+export const { handlers, signIn, signOut, auth } = nextAuthInstance

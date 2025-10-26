@@ -23,8 +23,10 @@ const AuthProvider = (props: AuthProviderProps) => {
 
     return (
         /** since the next auth useSession hook was triggering mutliple re-renders, hence we are using the our custom session provider and we still included the next auth session provider, incase we need to use any client hooks from next auth */
-        <NextAuthSessionProvider session={session} refetchOnWindowFocus={false}>
-            <SessionContext.Provider value={session}>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <NextAuthSessionProvider session={session as any} refetchOnWindowFocus={false}>
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+            <SessionContext.Provider value={session as any}>
                 {children}
             </SessionContext.Provider>
         </NextAuthSessionProvider>

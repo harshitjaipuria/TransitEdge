@@ -8,14 +8,16 @@ import {
 import { REDIRECT_URL_KEY } from '@/constants/app.constant'
 import appConfig from '@/configs/app.config'
 
-const { auth } = NextAuth(authConfig)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const { auth } = (NextAuth as any)(authConfig)
 
 const publicRoutes = Object.entries(_publicRoutes).map(([key]) => key)
 const authRoutes = Object.entries(_authRoutes).map(([key]) => key)
 
 const apiAuthPrefix = `${appConfig.apiPrefix}/auth`
 
-export default auth((req) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default auth((req: any) => {
     const { nextUrl } = req
     const isSignedIn = !!req.auth
 

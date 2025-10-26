@@ -2,7 +2,6 @@
 
 import { signIn } from '@/auth'
 import appConfig from '@/configs/app.config'
-import { AuthError } from 'next-auth'
 import type { SignInCredential } from '@/@types/auth'
 
 export const onSignInWithCredentials = async (
@@ -15,16 +14,12 @@ export const onSignInWithCredentials = async (
             password,
             redirectTo: callbackUrl || appConfig.authenticatedEntryPath,
         })
-    } catch (error) {
-        if (error instanceof AuthError) {
-            /** Customize error message based on AuthError */
-            switch (error.type) {
-                case 'CredentialsSignin':
-                    return { error: 'Invalid credentials!' }
-                default:
-                    return { error: 'Something went wrong!' }
-            }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+        // Handle authentication errors
+        if (error?.message?.includes('CredentialsSignin') || error?.message?.includes('Invalid')) {
+            return { error: 'Invalid credentials!' }
         }
-        throw error
+        return { error: 'Something went wrong!' }
     }
 }

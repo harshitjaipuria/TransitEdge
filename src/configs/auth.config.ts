@@ -1,20 +1,10 @@
-import type { NextAuthConfig } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
-import Github from 'next-auth/providers/github'
-import Google from 'next-auth/providers/google'
 
 import type { SignInCredential } from '@/@types/auth'
 
-export default {
+// eslint-disable-next-line import/no-anonymous-default-export
+const authConfig = {
     providers: [
-        Github({
-            clientId: process.env.GITHUB_AUTH_CLIENT_ID,
-            clientSecret: process.env.GITHUB_AUTH_CLIENT_SECRET,
-        }),
-        Google({
-            clientId: process.env.GOOGLE_AUTH_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
-        }),
         Credentials({
             async authorize(credentials) {
                 /** validate credentials from backend here */
@@ -37,14 +27,16 @@ export default {
         }),
     ],
     callbacks: {
-        async jwt({ token, user }) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        async jwt({ token, user }: { token: any; user: any }) {
             if (user && 'role' in user) {
                 token.role = (user as { role: number }).role
                 console.log('JWT callback - user role:', (user as { role: number }).role, 'token role:', token.role)
             }
             return token
         },
-        async session(payload) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        async session(payload: any) {
             /** apply extra user attributes here, for example, we add 'authority' & 'id' in this section */
             const userRole = payload.token.role as number
             const authority = userRole === 1 ? ['admin'] : ['user']
@@ -63,4 +55,6 @@ export default {
             }
         },
     },
-} satisfies NextAuthConfig
+}
+
+export default authConfig

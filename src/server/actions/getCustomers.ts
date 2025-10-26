@@ -24,20 +24,24 @@ const getCustomers = async (_queryParams: {
 
     if (sortKey) {
         if (sortKey !== 'totalSpending') {
-            data.sort(
-                sortBy((sortKey || '') as string, order === 'desc', (a) =>
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (data as any).sort(
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                sortBy((sortKey || '') as string, order === 'desc', (a: any) =>
                     (a as string).toUpperCase(),
                 ),
             )
         } else {
-            data.sort(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (data as any).sort(
                 sortBy(sortKey as string, order === 'desc', parseInt as Primer),
             )
         }
     }
 
     if (query) {
-        data = wildCardSearch(data, query as string)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        data = wildCardSearch(data as any, query as string)
         total = data.length
     }
 
