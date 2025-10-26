@@ -33,7 +33,6 @@ import type { ControlProps, OptionProps } from 'react-select'
 // Form Schema Types
 type OverviewFields = {
     stationName: string
-    stationCode: string
     displayName: string
     email?: string
     dialCode: string
@@ -68,7 +67,6 @@ type StationFormSchema = OverviewFields &
 // Validation Schema
 const validationSchema = z.object({
     stationName: z.string().min(1, { message: 'Station name required' }),
-    stationCode: z.string().min(1, { message: 'Station code required' }),
     displayName: z.string().min(1, { message: 'Display name required' }),
     email: z
         .string()
@@ -181,7 +179,6 @@ const StationCreate = () => {
 
     const defaultValues: StationFormSchema = {
         stationName: '',
-        stationCode: '',
         displayName: '',
         email: '',
         phoneNumber: '',
@@ -224,7 +221,20 @@ const StationCreate = () => {
         setIsSubmiting(true)
         
         try {
-            // TODO: Implement station creation API call
+            const response = await fetch('/api/station/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values),
+            })
+
+            const data = await response.json()
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Failed to create station')
+            }
+
             toast.push(
                 <Notification type="success">Station created successfully!</Notification>,
                 { placement: 'top-center' },
@@ -297,24 +307,6 @@ const StationCreate = () => {
                                                     type="text"
                                                     autoComplete="off"
                                                     placeholder="Station Name"
-                                                    {...field}
-                                                />
-                                            )}
-                                        />
-                                    </FormItem>
-                                    <FormItem
-                                        label="Station Code *"
-                                        invalid={Boolean(errors.stationCode)}
-                                        errorMessage={errors.stationCode?.message}
-                                    >
-                                        <Controller
-                                            name="stationCode"
-                                            control={control}
-                                            render={({ field }) => (
-                                                <Input
-                                                    type="text"
-                                                    autoComplete="off"
-                                                    placeholder="Station Code"
                                                     {...field}
                                                 />
                                             )}

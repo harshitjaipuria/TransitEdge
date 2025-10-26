@@ -78,7 +78,7 @@ model station {
   zip_code       Int?
   country        String?   @default("India") @db.VarChar(50)
   display_name   String?   @db.VarChar(100)
-  telephone      Int?
+  telephone      BigInt?
   email_id       String?   @db.VarChar(100)
   contact_person String?   @db.VarChar(50)
   activity_1     Int?      @default(0)
