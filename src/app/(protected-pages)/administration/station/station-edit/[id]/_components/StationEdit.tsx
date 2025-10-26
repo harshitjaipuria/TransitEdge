@@ -33,7 +33,6 @@ import type { ControlProps, OptionProps } from 'react-select'
 // Form Schema Types
 type OverviewFields = {
     stationName: string
-    stationCode: string
     displayName: string
     email?: string
     dialCode: string
@@ -68,7 +67,6 @@ type StationFormSchema = OverviewFields &
 // Validation Schema
 const validationSchema = z.object({
     stationName: z.string().min(1, { message: 'Station name required' }),
-    stationCode: z.string().min(1, { message: 'Station code required' }),
     displayName: z.string().min(1, { message: 'Display name required' }),
     email: z
         .string()
@@ -184,7 +182,6 @@ const StationEdit = () => {
 
     const defaultValues: StationFormSchema = {
         stationName: '',
-        stationCode: '',
         displayName: '',
         email: '',
         phoneNumber: '',
@@ -227,41 +224,46 @@ const StationEdit = () => {
     useEffect(() => {
         const loadStationData = async () => {
             try {
-                // TODO: Implement station fetch API call
-                // const response = await fetch(`/api/station/${stationId}`)
-                // const station = await response.json()
+                const response = await fetch(`/api/station/${stationId}`)
                 
-                // Mock data for now
-                const station = {
-                    station_name: 'Main Station',
-                    station_code: 'STN001',
-                    display_name: 'Main Station Mumbai',
-                    email_id: 'main@station.com',
-                    telephone: '9876543210',
-                    country: 'IN',
-                    address: '123 Main Street',
-                    city: 'Mumbai',
-                    zip_code: '400001',
-                    contact_person: 'John Doe',
-                    activity_1: 1,
-                    activity_2: 0,
-                    activity_3: 1,
-                    activity_4: 0,
-                    activity_5: 1,
-                    activity_6: 0,
+                if (!response.ok) {
+                    throw new Error('Failed to fetch station')
+                }
+                
+                const result = await response.json()
+                
+                if (result.status !== 'success') {
+                    throw new Error(result.message || 'Failed to fetch station')
+                }
+                
+                const station = result.data
+
+                // Extract dial code and phone number from telephone
+                let dialCode = '+91' // Default
+                let phoneNumber = ''
+                
+                if (station.telephone) {
+                    const phoneStr = station.telephone.toString()
+                    if (phoneStr.startsWith('91') && phoneStr.length === 12) {
+                        dialCode = '+91'
+                        phoneNumber = phoneStr.slice(2)
+                    } else if (phoneStr.length === 10) {
+                        phoneNumber = phoneStr
+                    } else {
+                        phoneNumber = phoneStr.slice(-10)
+                    }
                 }
 
                 reset({
                     stationName: station.station_name || '',
-                    stationCode: station.station_code || '',
                     displayName: station.display_name || '',
                     email: station.email_id || '',
-                    phoneNumber: station.telephone ? station.telephone.toString().slice(-10) : '',
-                    dialCode: '+91',
+                    phoneNumber: phoneNumber,
+                    dialCode: dialCode,
                     country: station.country || '',
                     address: station.address || '',
                     city: station.city || '',
-                    zipCode: station.zip_code || '',
+                    zipCode: station.zip_code?.toString() || '',
                     contactPerson: station.contact_person || '',
                     activity1: station.activity_1 === 1,
                     activity2: station.activity_2 === 1,
@@ -291,20 +293,19 @@ const StationEdit = () => {
         setIsSubmiting(true)
         
         try {
-            // TODO: Implement station update API call
-            // const response = await fetch(`/api/station/${stationId}`, {
-            //     method: 'PUT',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(values),
-            // })
+            const response = await fetch(`/api/station/${stationId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values),
+            })
 
-            // const result = await response.json()
+            const result = await response.json()
 
-            // if (!response.ok) {
-            //     throw new Error(result.message || 'Failed to update station')
-            // }
+            if (!response.ok) {
+                throw new Error(result.message || 'Failed to update station')
+            }
 
             toast.push(
                 <Notification type="success">Station updated successfully!</Notification>,
@@ -389,24 +390,6 @@ const StationEdit = () => {
                                                     type="text"
                                                     autoComplete="off"
                                                     placeholder="Station Name"
-                                                    {...field}
-                                                />
-                                            )}
-                                        />
-                                    </FormItem>
-                                    <FormItem
-                                        label="Station Code"
-                                        invalid={Boolean(errors.stationCode)}
-                                        errorMessage={errors.stationCode?.message}
-                                    >
-                                        <Controller
-                                            name="stationCode"
-                                            control={control}
-                                            render={({ field }) => (
-                                                <Input
-                                                    type="text"
-                                                    autoComplete="off"
-                                                    placeholder="Station Code"
                                                     {...field}
                                                 />
                                             )}
