@@ -320,11 +320,7 @@ const BrokerEdit = ({ brokerId }: BrokerEditProps) => {
                                 <h4 className="mb-6">Overview</h4>
                                 <div className="grid md:grid-cols-2 gap-4">
                                     <FormItem
-                                        label={
-                                            <span>
-                                                Broker Name <span className="text-red-500">*</span>
-                                            </span>
-                                        }
+                                        label="Broker Name *"
                                         invalid={Boolean(errors.firstName)}
                                         errorMessage={errors.firstName?.message}
                                     >
@@ -342,11 +338,7 @@ const BrokerEdit = ({ brokerId }: BrokerEditProps) => {
                                         />
                                     </FormItem>
                                     <FormItem
-                                        label={
-                                            <span>
-                                                Father&apos;s Name <span className="text-red-500">*</span>
-                                            </span>
-                                        }
+                                        label="Father's Name *"
                                         invalid={Boolean(errors.lastName)}
                                         errorMessage={errors.lastName?.message}
                                     >
@@ -428,11 +420,8 @@ const BrokerEdit = ({ brokerId }: BrokerEditProps) => {
                             <Card>
                                 <h4 className="mb-6">Address Information</h4>
                                 <FormItem
-                                    label={
-                                        <span>
-                                            Country <span className="text-red-500">*</span>
-                                        </span>
-                                    }
+                                    label="Country"
+                                    asterisk
                                     invalid={Boolean(errors.country)}
                                     errorMessage={errors.country?.message}
                                 >
@@ -456,11 +445,8 @@ const BrokerEdit = ({ brokerId }: BrokerEditProps) => {
                                     />
                                 </FormItem>
                                 <FormItem
-                                    label={
-                                        <span>
-                                            Address <span className="text-red-500">*</span>
-                                        </span>
-                                    }
+                                    label="Address"
+                                    asterisk
                                     invalid={Boolean(errors.address)}
                                     errorMessage={errors.address?.message}
                                 >
@@ -479,11 +465,8 @@ const BrokerEdit = ({ brokerId }: BrokerEditProps) => {
                                 </FormItem>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <FormItem
-                                        label={
-                                            <span>
-                                                City <span className="text-red-500">*</span>
-                                            </span>
-                                        }
+                                        label="City"
+                                        asterisk
                                         invalid={Boolean(errors.city)}
                                         errorMessage={errors.city?.message}
                                     >
@@ -501,11 +484,8 @@ const BrokerEdit = ({ brokerId }: BrokerEditProps) => {
                                         />
                                     </FormItem>
                                     <FormItem
-                                        label={
-                                            <span>
-                                                Postal Code <span className="text-red-500">*</span>
-                                            </span>
-                                        }
+                                        label="Postal Code"
+                                        asterisk
                                         invalid={Boolean(errors.postcode)}
                                         errorMessage={errors.postcode?.message}
                                     >
@@ -551,11 +531,8 @@ const BrokerEdit = ({ brokerId }: BrokerEditProps) => {
                             <Card>
                                 <h4 className="mb-6">License Details</h4>
                                 <FormItem
-                                    label={
-                                        <span>
-                                            License No <span className="text-red-500">*</span>
-                                        </span>
-                                    }
+                                    label="License No"
+                                    asterisk
                                     invalid={Boolean(errors.licenseNumber)}
                                     errorMessage={errors.licenseNumber?.message}
                                 >
@@ -578,11 +555,8 @@ const BrokerEdit = ({ brokerId }: BrokerEditProps) => {
                                     />
                                 </FormItem>
                                 <FormItem
-                                    label={
-                                        <span>
-                                            Issue By <span className="text-red-500">*</span>
-                                        </span>
-                                    }
+                                    label="Issue By"
+                                    asterisk
                                     invalid={Boolean(errors.issueBy)}
                                     errorMessage={errors.issueBy?.message}
                                 >
@@ -600,11 +574,8 @@ const BrokerEdit = ({ brokerId }: BrokerEditProps) => {
                                     />
                                 </FormItem>
                                 <FormItem
-                                    label={
-                                        <span>
-                                            License Date <span className="text-red-500">*</span>
-                                        </span>
-                                    }
+                                    label="License Date"
+                                    asterisk
                                     invalid={Boolean(errors.licenseDate)}
                                     errorMessage={errors.licenseDate?.message}
                                 >
