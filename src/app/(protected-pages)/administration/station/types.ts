@@ -7,7 +7,7 @@ export interface Station {
     zip_code: number
     country: string
     display_name: string
-    telephone: number
+    telephone: string | null
     email_id: string
     contact_person: string
     activity_1: number

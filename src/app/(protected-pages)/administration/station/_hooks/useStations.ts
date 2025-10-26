@@ -36,59 +36,22 @@ export const useStations = ({
             setLoading(true)
             setError(null)
 
-            // TODO: Replace with actual API call
-            // const response = await fetch(
-            //     `/api/station/list?page=${page}&limit=${limit}&search=${search}&sortBy=${sortBy}&sortOrder=${sortOrder}`
-            // )
-            // const data = await response.json()
+            const response = await fetch(
+                `/api/station/list?page=${page}&limit=${limit}&search=${search}&sortBy=${sortBy}&sortOrder=${sortOrder}`
+            )
+            
+            if (!response.ok) {
+                throw new Error('Failed to fetch stations')
+            }
+            
+            const data = await response.json()
 
-            // Mock data for now
-            const mockStations: Station[] = [
-                {
-                    id: 1,
-                    station_code: 'STN001',
-                    station_name: 'Main Station',
-                    address: '123 Main Street',
-                    city: 'Mumbai',
-                    zip_code: 400001,
-                    country: 'India',
-                    display_name: 'Main Station Mumbai',
-                    telephone: 9876543210,
-                    email_id: 'main@station.com',
-                    contact_person: 'John Doe',
-                    activity_1: 1,
-                    activity_2: 0,
-                    activity_3: 1,
-                    activity_4: 0,
-                    activity_5: 1,
-                    activity_6: 0,
-                    created_at: '2024-01-01T00:00:00Z'
-                },
-                {
-                    id: 2,
-                    station_code: 'STN002',
-                    station_name: 'Central Station',
-                    address: '456 Central Avenue',
-                    city: 'Delhi',
-                    zip_code: 110001,
-                    country: 'India',
-                    display_name: 'Central Station Delhi',
-                    telephone: 9876543211,
-                    email_id: 'central@station.com',
-                    contact_person: 'Jane Smith',
-                    activity_1: 1,
-                    activity_2: 1,
-                    activity_3: 0,
-                    activity_4: 1,
-                    activity_5: 0,
-                    activity_6: 1,
-                    created_at: '2024-01-02T00:00:00Z'
-                }
-            ]
-
-            console.log('useStations - Setting stations:', mockStations)
-            setStations(mockStations)
-            setTotal(mockStations.length)
+            if (data.status === 'success') {
+                setStations(data.data)
+                setTotal(data.total)
+            } else {
+                throw new Error(data.message || 'Failed to fetch stations')
+            }
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to fetch stations')
         } finally {
