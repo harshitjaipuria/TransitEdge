@@ -87,7 +87,7 @@ export async function PATCH(
                 (typeof phoneNumber !== 'undefined' ? phoneNumber || '' : '')
             if (phoneStr) {
                 const phoneNumberBigInt = BigInt(phoneStr.replace(/\D/g, ''))
-                data.phone_number = phoneNumberBigInt
+                data.phone_number = phoneNumberBigInt.toString()
             } else {
                 data.phone_number = null
             }
