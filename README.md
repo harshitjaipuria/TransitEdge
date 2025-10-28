@@ -30,6 +30,18 @@ Integrate with GST APIs for automatic verification.
 Track active, expired, and cancelled E-Way bills.
 Sync bill details with shipments and fleet records.
 
+🧠 Tech Stack
+
+Language - TypeScript
+Frontend - Next.js + React
+Backend - Node.js (REST APIs)
+Database - MySQL
+Authentication - JWT / NextAuth (configurable)
+Hosting - VPS Server with PM2 Process Manager
+Version Control - Git & GitHub
+
+
+
 
 
 
