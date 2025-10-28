@@ -57,6 +57,22 @@ Real-time synchronization between warehouse, fleet, and billing modules.
 Secure, scalable, and optimized for high performance.
 Reduces manual effort and improves accuracy in transport operations.
 
+📞 Contact
+
+Developer: Harshit Jaipuria
+Email: jaipuriaharshit146@gmail.com
+LinkedIn: https://www.linkedin.com/in/harshit-jaipuria/
+
+💻 Usage
+
+Open your browser and visit:
+👉 http://shreeshyamexpress.site/
+
+From the dashboard, you can:
+
+Manage warehouses and stock records.
+Add and assign vehicles for dispatch.
+Generate and track E-Way bills for consignments.
 
 
 
