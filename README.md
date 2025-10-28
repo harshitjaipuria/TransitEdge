@@ -40,6 +40,23 @@ Authentication - JWT / NextAuth (configurable)
 Hosting - VPS Server with PM2 Process Manager
 Version Control - Git & GitHub
 
+🏗️ Architecture
+
+The system follows a modular client–server architecture:
+
+Frontend (Next.js + React): Provides a responsive, modern, and interactive dashboard for users.
+Backend (Node.js): Exposes RESTful APIs for managing warehouses, fleets, and E-Way bills.
+Database (MySQL): Stores all persistent data with relational mapping for efficiency and reliability.
+PM2 on VPS: Ensures stable deployment, process monitoring, and automatic restarts.
+
+🚀 Advantages
+
+Unified control panel for all logistics operations.
+Real-time synchronization between warehouse, fleet, and billing modules.
+Secure, scalable, and optimized for high performance.
+Reduces manual effort and improves accuracy in transport operations.
+
+
 
 
 
