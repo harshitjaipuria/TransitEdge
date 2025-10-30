@@ -8,6 +8,7 @@ import {
     PiTruckDuotone,
     PiBuildingOfficeDuotone,
     PiListDuotone,
+    PiUsersDuotone,
 } from 'react-icons/pi'
 import type { JSX } from 'react'
 
@@ -23,6 +24,7 @@ const navigationIcon: NavigationIcons = {
     fleet: <PiTruckDuotone />,
     building: <PiBuildingOfficeDuotone />,
     list: <PiListDuotone />,
+    users: <PiUsersDuotone />,
 }
 
 export default navigationIcon

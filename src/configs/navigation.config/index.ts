@@ -124,9 +124,39 @@ const navigationConfig: NavigationTree[] = [
                     },
                 ],
             },
+            {
+                key: 'clientManagement.menu',
+                path: '',
+                title: 'Client Management',
+                translateKey: 'Masters',
+                icon: 'users',
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [ADMIN, USER],
+                subMenu: [
+                    {
+                        key: 'clientManagement.consignee',
+                        path: '/client-management/consignee',
+                        title: 'Consignee',
+                        translateKey: 'nav.client.management.consignee',
+                        icon: 'user',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'clientManagement.cosignor',
+                        path: '/client-management/cosignor',
+                        title: 'Cosignor',
+                        translateKey: 'nav.client.management.cosignor',
+                        icon: 'user',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    }
+                ],
+            },
         ],
-    }
-    
+    },
 ]
 
 export default navigationConfig
