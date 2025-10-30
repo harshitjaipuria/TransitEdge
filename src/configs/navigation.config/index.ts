@@ -145,7 +145,7 @@ const navigationConfig: NavigationTree[] = [
                     },
                     {
                         key: 'clientManagement.cosignor',
-                        path: '/client-management/cosignor',
+                        path: '/client/consignor',
                         title: 'Cosignor',
                         translateKey: 'nav.client.management.cosignor',
                         icon: 'user',
